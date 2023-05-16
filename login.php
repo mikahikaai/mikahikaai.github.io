@@ -23,41 +23,22 @@ if (isset($_SESSION['errorakses'])) {
 
 $errorlogin = false;
 
-if (isset($_COOKIE['id']) && isset($_COOKIE['keylog'])) {
-  $loginsql = "SELECT * FROM karyawan WHERE id=?";
-  $stmt = $db->prepare($loginsql);
-  $stmt->bindParam(1, $_COOKIE['id']);
-  $stmt->execute();
-  $row = $stmt->fetch(PDO::FETCH_ASSOC);
-  if ($_COOKIE['keylog'] === hash('sha256', $row['username'])) {
-    $_SESSION['id'] = $row['id'];
-    $_SESSION['username'] = $row['username'];
-    $_SESSION['jabatan'] = $row['jabatan'];
-    $_SESSION['nama'] = $row['nama'];
-    $_SESSION['foto'] = $row['foto'];
-    $_SESSION['login_sukses'] = true;
-  }
-}
-
-if (isset($_SESSION['jabatan'])) {
-  if ($_SESSION['jabatan'] == "ADMINKEU") {
-    echo '<meta http-equiv="refresh" content="0;url=/adminkeu/"/>';
-  } else if ($_SESSION['jabatan'] == "SPVDISTRIBUSI") {
-    echo '<meta http-equiv="refresh" content="0;url=/spvdist/"/>';
-  } else if ($_SESSION['jabatan'] == "DRIVER" or $_SESSION['jabatan'] == "HELPER") {
-    echo '<meta http-equiv="refresh" content="0;url=/karyawan/"/>';
-  } else if ($_SESSION['jabatan'] == "MGRDISTRIBUSI") {
-    echo '<meta http-equiv="refresh" content="0;url=/mgrdist/"/>';
+if (isset($_SESSION['level'])) {
+  if ($_SESSION['level'] == "Owner") {
+    echo '<meta http-equiv="refresh" content="0;url=/owner/"/>';
+  } else if ($_SESSION['level'] == "Admin") {
+    echo '<meta http-equiv="refresh" content="0;url=/admin/"/>';
+  } else if ($_SESSION['level'] == "Kasir") {
+    echo '<meta http-equiv="refresh" content="0;url=/kasir/"/>';
   }
   die();
 }
 
 if (isset($_POST['login'])) {
-  $loginsql = "SELECT * FROM karyawan WHERE username=? and password=?";
+  $loginsql = "SELECT * FROM data_pengguna WHERE username=? and password=?";
   $stmt = $db->prepare($loginsql);
   $stmt->bindParam(1, $_POST['username']);
-  $md5 = md5($_POST['password']);
-  $stmt->bindParam(2, $md5);
+  $stmt->bindParam(2, $_POST['password']);
   $stmt->execute();
 
   $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -65,33 +46,30 @@ if (isset($_POST['login'])) {
   if ($stmt->rowCount() > 0) {
     $_SESSION['id'] = $row['id'];
     $_SESSION['username'] = $row['username'];
-    $_SESSION['jabatan'] = $row['jabatan'];
+    $_SESSION['level'] = $row['level'];
     $_SESSION['nama'] = $row['nama'];
-    $_SESSION['foto'] = $row['foto'];
     $_SESSION['login_sukses'] = true;
 
-    if (isset($_POST['remember'])) {
-      setcookie('id', $row['id'], time() + 60 * 60 * 24 * 7);
-      setcookie('keylog', hash('sha256', $row['username']), time() + 60 * 60 * 24 * 7);
-    }
+    // var_dump($_SESSION['level']);
+    // die();
 
-    if ($_SESSION['jabatan'] == "ADMINKEU") {
-      echo '<meta http-equiv="refresh" content="0;url=/adminkeu/"/>';
-      die();
-    } else if ($_SESSION['jabatan'] == "SPVDISTRIBUSI") {
-      echo '<meta http-equiv="refresh" content="0;url=/spvdist"/>';
-      die();
-    } else if ($_SESSION['jabatan'] == "DRIVER" || $_SESSION['jabatan'] == "HELPER") {
-      echo '<meta http-equiv="refresh" content="0;url=/karyawan"/>';
-      die();
-    } else if ($_SESSION['jabatan'] == "MGRDISTRIBUSI") {
-      echo '<meta http-equiv="refresh" content="0;url=/mgrdist"/>';
+    if (isset($_SESSION['level'])) {
+      if ($_SESSION['level'] == "Owner") {
+        echo '<meta http-equiv="refresh" content="0;url=/owner/"/>';
+      } else if ($_SESSION['level'] == "Admin") {
+        echo '<meta http-equiv="refresh" content="0;url=/admin/"/>';
+      } else if ($_SESSION['level'] == "Kasir") {
+        echo '<meta http-equiv="refresh" content="0;url=/kasir/"/>';
+      }
       die();
     }
   } else {
     $errorlogin = true;
   }
 }
+
+// var_dump($_SESSION['level']);
+// die();
 
 
 // var_dump($errorlogin);
@@ -101,7 +79,7 @@ if (isset($_POST['login'])) {
 <html lang="en">
 
 <head>
-  <title>Login | PT PKS</title>
+  <title>Login | Apotek Fatih</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -122,7 +100,7 @@ if (isset($_POST['login'])) {
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6 text-center mb-5">
-          <h2 class="heading-section">PT PANCURAN KAAPIT SENDANG</h2>
+          <h2 class="heading-section">Apotek Fatih</h2>
         </div>
       </div>
       <div class="row justify-content-center">
@@ -168,10 +146,6 @@ if (isset($_POST['login'])) {
               </div>
               <div class="form-group d-md-flex">
                 <div class="w-50">
-                  <label class="checkbox-wrap checkbox-primary">Ingat Saya
-                    <input type="checkbox" name="remember" checked>
-                    <span class="checkmark"></span>
-                  </label>
                 </div>
                 <div class="w-50 text-md-right">
                   <a href="/lupa_password.php" style="color: #fff">Lupa Password</a>

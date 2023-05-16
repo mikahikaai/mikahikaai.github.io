@@ -8,8 +8,8 @@ class Database
   function __construct()
   {
     // 1357
-    $online = array("srv158.niagahoster.com", "u1796449_rianseptiadi", "Rtbcvyfhgnpozx1!", "u1796449_ayominumamanah");
-    $offline = array("localhost", "root", "", "ayominumamanah");
+    $online = array("srv158.niagahoster.com", "u1796449_rianseptiadi", "Rtbcvyfhgnpozx1!", "u1796449_apotikfatih");
+    $offline = array("localhost", "root", "", "apotikfatih");
 
     $koneksi = 1; // online
 

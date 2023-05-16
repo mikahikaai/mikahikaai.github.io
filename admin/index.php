@@ -3,11 +3,11 @@ session_start();
 
 date_default_timezone_set("Asia/Kuala_Lumpur");
 
-if (!isset($_SESSION['jabatan'])) {
+if (!isset($_SESSION['level'])) {
   echo '<meta http-equiv="refresh" content="0;url=/login.php">';
   exit;
 } else {
-  if ($_SESSION['jabatan'] != "ADMINKEU") {
+  if ($_SESSION['level'] != "Admin") {
     echo '<h2>ANDA TIDAK MEMILIKI AKSES KE HALAMAN INI !</h2>';
     echo '<meta http-equiv="refresh" content="2;url=/login.php"/>';
     exit;
@@ -81,7 +81,7 @@ include_once "../partials/scripts.php";
 <body class="hold-transition sidebar-mini" data-scrollbar-auto-hide="n">
   <?php
 
-  if ($host == "/" . "adminkeu" . "/") {
+  if ($host == "/" . "admin" . "/") {
   ?>
     <div class="preloader">
       <div class="loading">

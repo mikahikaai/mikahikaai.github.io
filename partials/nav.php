@@ -1,13 +1,11 @@
 <?php
-$jabatan = '';
-if ($_SESSION['jabatan'] == 'ADMINKEU') {
-  $jabatan = 'ADMIN KEUANGAN';
-} else if ($_SESSION['jabatan'] == 'SPVDISTRIBUSI') {
-  $jabatan = 'SUPERVISOR DISTRIBUSI';
-} else if ($_SESSION['jabatan'] == 'DRIVER' or $_SESSION['jabatan'] == 'HELPER') {
-  $jabatan = 'KARYAWAN';
-} else if ($_SESSION['jabatan'] == 'MGRDISTRIBUSI') {
-  $jabatan = 'MANAGER DISTRIBUSI';
+$level = '';
+if ($_SESSION['level'] == 'Admin') {
+  $level = 'Admin';
+} else if ($_SESSION['level'] == 'Owner') {
+  $level = 'Owner';
+} else if ($_SESSION['level'] == 'Kasir') {
+  $level = 'Kasir';
 }
 ?>
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -18,7 +16,7 @@ if ($_SESSION['jabatan'] == 'ADMINKEU') {
   </ul>
   <table width="100%">
     <tr>
-      <td align="center" style="font-weight: bold; font-size: 20px;"> >>> Selamat Datang Di Aplikasi Penggajian <span style="color : green;">PT PANCURAN KAAPIT SENDANG</span> - Saat Ini Anda Login Sebagai <span style="color: red;"><?= $jabatan ?></span>
+      <td align="center" style="font-weight: bold; font-size: 20px;"> >>> Selamat Datang Di Aplikasi Apotek Fatih</span> - Saat Ini Anda Login Sebagai <span style="color: red;"><?= $level ?></span>
         <<< </td>
     </tr>
   </table>

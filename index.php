@@ -1,20 +1,17 @@
 <?php
 session_start();
-if (!isset($_SESSION['jabatan'])) {
+if (!isset($_SESSION['level'])) {
   echo '<meta http-equiv="refresh" content="0;url=/login.php">';
   die();
 } else {
-  if ($_SESSION['jabatan'] == "ADMINKEU") {
-    echo '<meta http-equiv="refresh" content="0;url=adminkeu/"/>';
+  if ($_SESSION['level'] == "owner") {
+    echo '<meta http-equiv="refresh" content="0;url=owner/"/>';
     die();
-  } else if ($_SESSION['jabatan'] == "SPVDISTRIBUSI") {
-    echo '<meta http-equiv="refresh" content="0;url=spvdist/"/>';
+  } else if ($_SESSION['level'] == "admin") {
+    echo '<meta http-equiv="refresh" content="0;url=admnin/"/>';
     die();
-  } else if ($_SESSION['jabatan'] == "MGRDISTRIBUSI") {
-    echo '<meta http-equiv="refresh" content="0;url=mgrdist/"/>';
-    die();
-  } else if ($_SESSION['jabatan'] == "DRIVER" || $_SESSION['jabatan'] == "HELPER") {
-    echo '<meta http-equiv="refresh" content="0;url=karyawan/"/>';
+  } else if ($_SESSION['level'] == "kasir") {
+    echo '<meta http-equiv="refresh" content="0;url=kasir/"/>';
     die();
   }
 }
