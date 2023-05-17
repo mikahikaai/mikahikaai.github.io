@@ -10,25 +10,25 @@ if (isset($_GET['page'])) {
       file_exists('pages/home.php') ? include 'pages/home.php' : include '../pages/404.php';
       $title = 'Home';
       break;
-    case 'distributorread':
-      file_exists('pages/distributor/distributorread.php') ? include 'pages/distributor/distributorread.php' : include '../pages/404.php';
-      $title = 'Distributor';
+    case 'obatread':
+      file_exists('pages/obat/obatread.php') ? include 'pages/obat/obatread.php' : include '../pages/404.php';
+      $title = 'Obat';
       break;
-    case 'distributorcreate':
-      file_exists('pages/distributor/distributorcreate.php') ? include 'pages/distributor/distributorcreate.php' : include '../pages/404.php';
-      $title = 'Distributor';
+    case 'obatcreate':
+      file_exists('pages/obat/obatcreate.php') ? include 'pages/obat/obatcreate.php' : include '../pages/404.php';
+      $title = 'Obat';
       break;
-    case 'distributorupdate':
-      file_exists('pages/distributor/distributorupdate.php') ? include 'pages/distributor/distributorupdate.php' : include '../pages/404.php';
-      $title = 'Distributor';
+    case 'obatupdate':
+      file_exists('pages/obat/obatupdate.php') ? include 'pages/obat/obatupdate.php' : include '../pages/404.php';
+      $title = 'Obat';
       break;
-    case 'distributordelete':
-      file_exists('pages/distributor/distributordelete.php') ? include 'pages/distributor/distributordelete.php' : include '../pages/404.php';
-      $title = 'Distributor';
+    case 'obatdelete':
+      file_exists('pages/obat/obatdelete.php') ? include 'pages/obat/obatdelete.php' : include '../pages/404.php';
+      $title = 'Obat';
       break;
-    case 'distributordetail':
-      file_exists('pages/distributor/distributordetail.php') ? include 'pages/distributor/distributordetail.php' : include '../pages/404.php';
-      $title = 'Distributor';
+    case 'obatdetail':
+      file_exists('pages/obat/obatdetail.php') ? include 'pages/obat/obatdetail.php' : include '../pages/404.php';
+      $title = 'Obat';
       break;
     case 'distribusiread':
       file_exists('pages/distribusi/distribusiread.php') ? include 'pages/distribusi/distribusiread.php' : include '../pages/404.php';

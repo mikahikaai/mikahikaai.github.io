@@ -2,7 +2,7 @@
 $database = new Database;
 $db = $database->getConnection();
     if(isset($_GET['id'])){
-        $deletesql = "DELETE from distributor where id=?"; 
+        $deletesql = "DELETE from obat where id_obat=?"; 
         $stmt = $db->prepare($deletesql);
         $stmt->bindParam(1, $_GET['id']);
     }
@@ -13,5 +13,5 @@ $db = $database->getConnection();
         $_SESSION['hasil_delete'] = false;
         $_SESSION['pesan'] = "Gagal Menghapus Data";
     }
-    echo '<meta http-equiv="refresh" content="0;url=?page=distributorread"/>';
+    echo '<meta http-equiv="refresh" content="0;url=?page=obatread"/>';
     exit;

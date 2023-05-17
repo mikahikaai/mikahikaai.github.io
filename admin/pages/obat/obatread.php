@@ -48,12 +48,12 @@ if (isset($_SESSION['hasil'])) {
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0">Distributor</h1>
+        <h1 class="m-0">Obat</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="?page=home">Home</a></li>
-          <li class="breadcrumb-item active">Distributor</li>
+          <li class="breadcrumb-item active">Obat</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -65,26 +65,27 @@ if (isset($_SESSION['hasil'])) {
 <div class="content">
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Data Distributor</h3>
-      <a href="report/reportdistributor.php" target="_blank" class="btn btn-warning btn-sm float-right">
+      <h3 class="card-title">Data Obat</h3>
+      <a href="report/reportobat.php" target="_blank" class="btn btn-warning btn-sm float-right">
         <i class="fa fa-file-pdf"></i> Export PDF
       </a>
-      <a href="?page=distributorcreate" class="btn btn-success btn-sm mr-2 float-right">
+      <a href="?page=obatcreate" class="btn btn-success btn-sm mr-2 float-right">
         <i class="fa fa-plus-circle"></i> Tambah Data
       </a>
     </div>
     <div class="card-body">
-      <table id="mytable" class="table table-bordered" style="white-space: nowrap; table-layout: fixed;">
+      <table id="mytable" class="table table-bordered" style="white-space: nowrap;" width="100%">
         <thead>
           <tr>
             <th>No.</th>
-            <th>Nama Lengkap</th>
-            <th>ID Distributor</th>
-            <th>Paket</th>
-            <th>Alamat Dropping</th>
-            <th>No. Telepon</th>
-            <th>Jarak</th>
-            <th>Status Keaktifan</th>
+            <th>Nama Obat</th>
+            <th>Jenis Obat</th>
+            <th>Harga Jual</th>
+            <th>Harga Beli</th>
+            <th>Minimal Stok</th>
+            <th>Stok Obat</th>
+            <th>Khasiat</th>
+            <th>Keterangan</th>
             <th style="display: flex;">Opsi</th>
           </tr>
         </thead>
@@ -93,7 +94,7 @@ if (isset($_SESSION['hasil'])) {
           $database = new Database;
           $db = $database->getConnection();
 
-          $selectsql = 'SELECT * FROM distributor order by nama asc';
+          $selectsql = 'SELECT * FROM obat order by nama_obat asc';
           $stmt = $db->prepare($selectsql);
           $stmt->execute();
 
@@ -105,21 +106,22 @@ if (isset($_SESSION['hasil'])) {
           ?>
             <tr>
               <td><?= $no++ ?></td>
-              <td><?= $row['nama'] ?></td>
-              <td><?= $row['id_da'] ?></td>
-              <td><?= $row['paket'] ?></td>
-              <td><?= $row['alamat_dropping'] ?></td>
-              <td><?= $row['no_telepon'] ?></td>
-              <td><?= $row['jarak'] ?></td>
-              <td><?= $row['status_keaktifan'] ?></td>
+              <td style="text-transform: uppercase;"><?= $row['nama_obat'] ?></td>
+              <td><?= $row['jenis_obat'] ?></td>
+              <td><?= 'Rp. ' . number_format($row['harga_jual'], 0, ',', '.') ?></td>
+              <td><?= 'Rp. ' . number_format($row['harga_beli'], 0, ',', '.') ?></td>
+              <td><?= $row['minimal_stok'] ?></td>
+              <td><?= $row['stok_obat'] ?></td>
+              <td><?= $row['khasiat'] ?></td>
+              <td><?= $row['ket'] ?></td>
               <td>
-                <a href="?page=distributordetail&id=<?= $row['id']; ?>" class="btn btn-success btn-sm mr-1">
+                <a href="?page=obatdetail&id=<?= $row['id_obat']; ?>" class="btn btn-success btn-sm mr-1">
                   <i class="fa fa-eye"></i> Lihat
                 </a>
-                <a href="?page=distributorupdate&id=<?= $row['id']; ?>" class="btn btn-primary btn-sm mr-1">
+                <a href="?page=obatupdate&id=<?= $row['id_obat']; ?>" class="btn btn-primary btn-sm mr-1">
                   <i class="fa fa-edit"></i> Ubah
                 </a>
-                <a href="?page=distributordelete&id=<?= $row['id']; ?>" class="btn btn-danger btn-sm mr-1" id='deletedistributor'>
+                <a href="?page=obatdelete&id=<?= $row['id_obat']; ?>" class="btn btn-danger btn-sm mr-1" id='deleteobat'>
                   <i class="fa fa-trash"></i> Hapus
                 </a>
               </td>
@@ -136,7 +138,7 @@ include_once "../partials/scriptdatatables.php";
 ?>
 <script>
   $(function() {
-    $('a#deletedistributor').click(function(e) {
+    $('a#deleteobat').click(function(e) {
       e.preventDefault();
       var urlToRedirect = e.currentTarget.getAttribute('href');
       //use currentTarget because the click may be on the nested i tag and not a tag causing the href to be empty
@@ -177,7 +179,7 @@ include_once "../partials/scriptdatatables.php";
         confirmButtonText: 'OK'
       })
     }
-    
+
     $('#mytable').DataTable({
       pagingType: "full_numbers",
       stateSave: true,
@@ -185,10 +187,6 @@ include_once "../partials/scriptdatatables.php";
       scrollX: true,
       scrollCollapse: true,
       select: true,
-      fixedColumns: {
-        leftColumns: 2,
-        rightColumns: 1
-      },
     });
   });
 </script>
