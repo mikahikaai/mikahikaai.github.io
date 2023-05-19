@@ -28,7 +28,7 @@ if (isset($_GET['id'])) {
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="?page=home">Home</a></li>
-          <li class="breadcrumb-item"><a href="?page=obatread">Obat</a></li>
+          <li class="breadcrumb-item"><a href="?page=suplierread">Obat</a></li>
           <li class="breadcrumb-item">Detail Obat</li>
         </ol>
       </div><!-- /.col -->
