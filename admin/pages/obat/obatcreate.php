@@ -41,7 +41,7 @@ if (isset($_POST['button_create'])) {
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="?page=home">Home</a></li>
-          <li class="breadcrumb-item"><a href="?page=distributorread">Obat</a></li>
+          <li class="breadcrumb-item"><a href="?page=obatread">Obat</a></li>
           <li class="breadcrumb-item">Tambah Obat</li>
         </ol>
       </div><!-- /.col -->
