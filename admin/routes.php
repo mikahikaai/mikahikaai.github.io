@@ -30,6 +30,26 @@ if (isset($_GET['page'])) {
       file_exists('pages/obat/obatdetail.php') ? include 'pages/obat/obatdetail.php' : include '../pages/404.php';
       $title = 'Obat';
       break;
+    case 'pelangganread':
+      file_exists('pages/pelanggan/pelangganread.php') ? include 'pages/pelanggan/pelangganread.php' : include '../pages/404.php';
+      $title = 'Pelanggan';
+      break;
+    case 'pelanggancreate':
+      file_exists('pages/pelanggan/pelanggancreate.php') ? include 'pages/pelanggan/pelanggancreate.php' : include '../pages/404.php';
+      $title = 'Pelanggan';
+      break;
+    case 'pelangganupdate':
+      file_exists('pages/pelanggan/pelangganupdate.php') ? include 'pages/pelanggan/pelangganupdate.php' : include '../pages/404.php';
+      $title = 'Pelanggan';
+      break;
+    case 'pelanggandelete':
+      file_exists('pages/pelanggan/pelanggandelete.php') ? include 'pages/pelanggan/pelanggandelete.php' : include '../pages/404.php';
+      $title = 'Pelanggan';
+      break;
+    case 'pelanggandetail':
+      file_exists('pages/pelanggan/pelanggandetail.php') ? include 'pages/pelanggan/pelanggandetail.php' : include '../pages/404.php';
+      $title = 'Pelanggan';
+      break;
     case 'suplierread':
       file_exists('pages/suplier/suplierread.php') ? include 'pages/suplier/suplierread.php' : include '../pages/404.php';
       $title = 'Suplier';
@@ -50,25 +70,25 @@ if (isset($_GET['page'])) {
       file_exists('pages/suplier/suplierdetail.php') ? include 'pages/suplier/suplierdetail.php' : include '../pages/404.php';
       $title = 'Suplier';
       break;
-    case 'suplierread':
-      file_exists('pages/suplier/suplierread.php') ? include 'pages/suplier/suplierread.php' : include '../pages/404.php';
-      $title = 'Suplier';
+    case 'dokterread':
+      file_exists('pages/dokter/dokterread.php') ? include 'pages/dokter/dokterread.php' : include '../pages/404.php';
+      $title = 'Dokter';
       break;
-    case 'supliercreate':
-      file_exists('pages/suplier/supliercreate.php') ? include 'pages/suplier/supliercreate.php' : include '../pages/404.php';
-      $title = 'Suplier';
+    case 'doktercreate':
+      file_exists('pages/dokter/doktercreate.php') ? include 'pages/dokter/doktercreate.php' : include '../pages/404.php';
+      $title = 'Dokter';
       break;
-    case 'suplierupdate':
-      file_exists('pages/suplier/suplierupdate.php') ? include 'pages/suplier/suplierupdate.php' : include '../pages/404.php';
-      $title = 'Suplier';
+    case 'dokterupdate':
+      file_exists('pages/dokter/dokterupdate.php') ? include 'pages/dokter/dokterupdate.php' : include '../pages/404.php';
+      $title = 'Dokter';
       break;
-    case 'suplierdelete':
-      file_exists('pages/suplier/suplierdelete.php') ? include 'pages/suplier/suplierdelete.php' : include '../pages/404.php';
-      $title = 'Suplier';
+    case 'dokterdelete':
+      file_exists('pages/dokter/dokterdelete.php') ? include 'pages/dokter/dokterdelete.php' : include '../pages/404.php';
+      $title = 'Dokter';
       break;
-    case 'suplierdetail':
-      file_exists('pages/suplier/suplierdetail.php') ? include 'pages/suplier/suplierdetail.php' : include '../pages/404.php';
-      $title = 'Suplier';
+    case 'dokterdetail':
+      file_exists('pages/dokter/dokterdetail.php') ? include 'pages/dokter/dokterdetail.php' : include '../pages/404.php';
+      $title = 'Dokter';
       break;
 
     case 'armadaread':
