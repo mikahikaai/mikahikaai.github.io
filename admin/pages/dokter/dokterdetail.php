@@ -3,7 +3,7 @@ $database = new Database;
 $db = $database->getConnection();
 
 if (isset($_GET['id'])) {
-  $selectsql = "SELECT * FROM data_pelanggan where id_pelanggan=?";
+  $selectsql = "SELECT * FROM data_dokter where id_dokter=?";
   $stmt = $db->prepare($selectsql);
   $stmt->bindParam(1, $_GET['id']);
   $stmt->execute();
@@ -23,13 +23,13 @@ if (isset($_GET['id'])) {
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0">Pelanggan</h1>
+        <h1 class="m-0">Dokter</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="?page=home">Home</a></li>
-          <li class="breadcrumb-item"><a href="?page=pelanggnaread">Pelanggan</a></li>
-          <li class="breadcrumb-item">Detail Pelanggan</li>
+          <li class="breadcrumb-item"><a href="?page=dokterread">Dokter</a></li>
+          <li class="breadcrumb-item">Detail Dokter</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -41,34 +41,36 @@ if (isset($_GET['id'])) {
 <div class="content">
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Data Detail Pelanggan</h3>
+      <h3 class="card-title">Data Detail Dokter</h3>
     </div>
     <div class="card-body">
       <form action="" method="post">
+        <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="nama_suplier">Nama Pelanggan</label>
-              <input type="text" name="nama" class="form-control" value="<?= $row['nama'] ?>" style="text-transform: uppercase;" readonly>
+              <label for="nama_dokter">Nama Dokter</label>
+              <input type="text" name="nama_dokter" class="form-control" value="<?= $row['nama_dokter'] ?>" style="text-transform: uppercase;" readonly>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label for="no_ktp">No KTP</label>
-              <input type="number" name="no_ktp" class="form-control" value="<?= $row['no_ktp'] ?>" style="text-transform: uppercase;" readonly>
+              <label for="spesialis">Spesialis</label>
+              <input type="text" name="spesialis" class="form-control" value="<?= $row['spesialis'] ?>" style="text-transform: uppercase;" readonly>
             </div>
           </div>
+        </div>
         <div class="form-group">
           <label for="alamat">Alamat</label>
           <br>
           <textarea name="alamat" rows="4" readonly><?= $row['alamat'] ?></textarea>
         </div>
         <div class="col-md-6">
-            <div class="form-group">
-              <label for="no_telp">No Telpon</label>
-              <input type="text" name="no_telp" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['no_telp'] : '' ?>" style="text-transform: uppercase;" required>
-            </div>
+          <div class="form-group">
+            <label for="no_telp">No Telpon</label>
+            <input type="text" name="no_telp" class="form-control" value="<?= $row['spesialis'] ?>" style="text-transform: uppercase;" readonly>
           </div>
-        <a href="?page=pelangganread" class="btn btn-danger btn-sm float-right mt-2">
+        </div>
+        <a href="?page=dokterread" class="btn btn-danger btn-sm float-right mt-2">
           <i class="fa fa-arrow-left"></i> Kembali
         </a>
       </form>

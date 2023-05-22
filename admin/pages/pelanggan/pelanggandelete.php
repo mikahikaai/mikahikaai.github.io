@@ -14,5 +14,5 @@ $db = $database->getConnection();
             $_SESSION['pesan'] = "Gagal Menghapus Data";
         }
     }
-    echo '<meta http-equiv="refresh" content="0;url=?page=suplierread"/>';
+    echo '<meta http-equiv="refresh" content="0;url=?page=pelangganread"/>';
     exit;

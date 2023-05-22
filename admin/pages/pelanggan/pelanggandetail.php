@@ -45,6 +45,7 @@ if (isset($_GET['id'])) {
     </div>
     <div class="card-body">
       <form action="" method="post">
+        <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label for="nama_suplier">Nama Pelanggan</label>
@@ -57,17 +58,32 @@ if (isset($_GET['id'])) {
               <input type="number" name="no_ktp" class="form-control" value="<?= $row['no_ktp'] ?>" style="text-transform: uppercase;" readonly>
             </div>
           </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="tgl_lahir">Tanggal Lahir</label>
+              <input type="date" name="tgl_lahir" class="form-control" value="<?= $row['tgl_lahir'] ?>" style="text-transform: uppercase;" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="jenis_kelamin">Jenis Kelamin</label>
+              <input type="text" name="jenis_kelamin" class="form-control" value="<?= $row['jenis_kelamin'] ?>" style="text-transform: uppercase;" readonly>
+            </div>
+          </div>
+        </div>
         <div class="form-group">
           <label for="alamat">Alamat</label>
           <br>
           <textarea name="alamat" rows="4" readonly><?= $row['alamat'] ?></textarea>
         </div>
         <div class="col-md-6">
-            <div class="form-group">
-              <label for="no_telp">No Telpon</label>
-              <input type="text" name="no_telp" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['no_telp'] : '' ?>" style="text-transform: uppercase;" required>
-            </div>
+          <div class="form-group">
+            <label for="no_telp">No Telpon</label>
+            <input type="text" name="no_telp" class="form-control" value="<?= $row['no_telp'] ?>" style="text-transform: uppercase;" readonly>
           </div>
+        </div>
         <a href="?page=pelangganread" class="btn btn-danger btn-sm float-right mt-2">
           <i class="fa fa-arrow-left"></i> Kembali
         </a>

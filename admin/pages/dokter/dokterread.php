@@ -103,8 +103,8 @@ if (isset($_SESSION['hasil'])) {
             <tr>
               <td><?= $no++ ?></td>
               <td style="text-transform: uppercase;"><?= $row['nama_dokter'] ?></td>
-              <td><?= $row['spesialis'] ?></td>
-              <td><?= $row['alamat'] ?></td>
+              <td style="text-transform: uppercase;"><?= $row['spesialis'] ?></td>
+              <td style="text-transform: uppercase;"><?= $row['alamat'] ?></td>
               <td><?= $row['no_telp'] ?></td>
               <td>
                 <a href="?page=dokterdetail&id=<?= $row['id_dokter']; ?>" class="btn btn-success btn-sm mr-1">

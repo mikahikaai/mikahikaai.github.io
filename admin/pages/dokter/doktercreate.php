@@ -3,10 +3,10 @@ $database = new Database;
 $db = $database->getConnection();
 
 if (isset($_POST['button_create'])) {
-  $insertsql = "INSERT INTO data_pelanggan (id_pelanggan, nama, no_ktp, alamat, no_telp) values (NULL,?,?,?,?)";
+  $insertsql = "INSERT INTO data_dokter (id_dokter, nama_dokter, spesialis, alamat, no_telp) values (NULL,?,?,?,?)";
   $stmt = $db->prepare($insertsql);
-  $stmt->bindParam(1, $_POST['nama']);
-  $stmt->bindParam(2, $_POST['no_ktp']);
+  $stmt->bindParam(1, $_POST['nama_dokter']);
+  $stmt->bindParam(2, $_POST['spesialis']);
   $stmt->bindParam(3, $_POST['alamat']);
   $stmt->bindParam(4, $_POST['no_telp']);
   if ($stmt->execute()) {
@@ -16,7 +16,7 @@ if (isset($_POST['button_create'])) {
     $_SESSION['hasil_create'] = false;
     $_SESSION['pesan'] = "Gagal Menyimpan Data";
   }
-  echo '<meta http-equiv="refresh" content="0;url=?page=suplierread"/>';
+  echo '<meta http-equiv="refresh" content="0;url=?page=dokterread"/>';
   exit;
 }
 ?>
@@ -32,13 +32,13 @@ if (isset($_POST['button_create'])) {
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0">Data Pelanggan</h1>
+        <h1 class="m-0">Data Dokter</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="?page=home">Home</a></li>
-          <li class="breadcrumb-item"><a href="?page=pelangganread">Data Pelanggan</a></li>
-          <li class="breadcrumb-item">Tambah Pelanggan</li>
+          <li class="breadcrumb-item"><a href="?page=dokterread">Data Dokter</a></li>
+          <li class="breadcrumb-item">Tambah Dokter</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -50,21 +50,21 @@ if (isset($_POST['button_create'])) {
 <div class="content">
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Data Tambah Pelanggan</h3>
+      <h3 class="card-title">Data Tambah Dokter</h3>
     </div>
     <div class="card-body">
       <form action="" method="post">
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="nama">Nama Pelanggan</label>
-              <input type="text" name="nama" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['nama'] : '' ?>" style="text-transform: uppercase;" required>
+              <label for="nama_dokter">Nama Dokter</label>
+              <input type="text" name="nama_dokter" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['nama_dokter'] : '' ?>" style="text-transform: uppercase;" required>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label for="no_ktp">No KTP</label>
-              <input type="text" name="no_ktp" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['no_ktp'] : '' ?>" style="text-transform: uppercase;" required>
+              <label for="spesialis">Spesialis</label>
+              <input type="text" name="spesialis" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['spesialis'] : '' ?>" style="text-transform: uppercase;" required>
             </div>
           </div>
         </div>
@@ -79,7 +79,7 @@ if (isset($_POST['button_create'])) {
               <input type="text" name="no_telp" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['no_telp'] : '' ?>" style="text-transform: uppercase;" required>
             </div>
           </div>
-        <a href="?page=pelangganread" class="btn btn-danger btn-sm float-right mt-2">
+        <a href="?page=dokterread" class="btn btn-danger btn-sm float-right mt-2">
           <i class="fa fa-arrow-left"></i> Kembali
         </a>
         <button type="submit" name="button_create" class="btn btn-success btn-sm float-right mr-1 mt-2">

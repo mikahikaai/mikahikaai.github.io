@@ -15,7 +15,7 @@ $db = $database->getConnection();
 // var_dump($_SESSION['status_kedatangan_obat']);
 // die();
 
-$selectsql = "SELECT * FROM obat ORDER BY nama_obat ASC";
+$selectsql = "SELECT * FROM suplier ORDER BY nama_suplier ASC";
 $stmt = $db->prepare($selectsql);
 $stmt->execute();
 ?>
@@ -72,7 +72,7 @@ $stmt->execute();
 
 <table style="width: 100%; margin-bottom: 10px;">
   <tr>
-    <td align="center" style="font-weight: bold; padding-bottom: 20px; font-size: x-large;"><u>DATA REKAP OBAT</u></td>
+    <td align="center" style="font-weight: bold; padding-bottom: 20px; font-size: x-large;"><u>DATA REKAP SUPLIER</u></td>
   </tr>
 </table>
 
@@ -81,14 +81,9 @@ $stmt->execute();
   <thead>
     <tr>
       <th>No.</th>
-      <th>Nama Obat</th>
-      <th>Jenis Obat</th>
-      <th>Harga Jual</th>
-      <th>Harga Beli</th>
-      <th>Minimal Stok</th>
-      <th>Stok Obat</th>
-      <th>Khasiat</th>
-      <th>Keterangan</th>
+      <th>Nama Suplier</th>
+      <th>Alamat</th>
+      <th>No Telpon</th>
     </tr>
   </thead>
   <tbody>
@@ -99,14 +94,9 @@ $stmt->execute();
     ?>
       <tr>
         <td><?= $no++ ?></td>
-        <td style="text-transform: uppercase;" ><?= $row['nama_obat'] ?></td>
-        <td><?= $row['jenis_obat'] ?></td>
-        <td><?= $row['harga_jual'] ?></td>
-        <td><?= $row['harga_beli'] ?></td>
-        <td><?= $row['minimal_stok'] ?></td>
-        <td><?= $row['stok_obat'] ?></td>
-        <td><?= $row['khasiat'] ?></td>
-        <td><?= $row['ket'] ?></td>
+        <td style="text-transform: uppercase;" ><?= $row['nama_suplier'] ?></td>
+        <td style="text-transform: uppercase;" ><?= $row['alamat'] ?></td>
+        <td><?= $row['no_telp'] ?></td>
       </tr>
     <?php } ?>
   </tbody>

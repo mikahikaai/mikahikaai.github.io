@@ -4,13 +4,15 @@ $db = $database->getConnection();
 
 if (isset($_POST['button_edit'])) {
 
-  $updatesql = "UPDATE data_pelanggan SET nama=?, no_ktp=?, alamat=?, no_telp WHERE id_pelanggan=?";
+  $updatesql = "UPDATE data_pelanggan SET nama=?, no_ktp=?, tgl_lahir=?, jenis_kelamin=?, alamat=?, no_telp=? WHERE id_pelanggan=?";
   $stmt = $db->prepare($updatesql);
   $stmt->bindParam(1, $_POST['nama']);
   $stmt->bindParam(2, $_POST['no_ktp']);
-  $stmt->bindParam(3, $_POST['alamat']);
-  $stmt->bindParam(4, $_POST['no_telp']);
-  $stmt->bindParam(5, $_GET['id']);
+  $stmt->bindParam(3, $_POST['tgl_lahir']);
+  $stmt->bindParam(4, $_POST['jenis_kelamin']);
+  $stmt->bindParam(5, $_POST['alamat']);
+  $stmt->bindParam(6, $_POST['no_telp']);
+  $stmt->bindParam(7, $_GET['id']);
 
   if ($stmt->execute()) {
     $_SESSION['hasil_update'] = true;
@@ -19,7 +21,7 @@ if (isset($_POST['button_edit'])) {
     $_SESSION['hasil_update'] = false;
     $_SESSION['pesan'] = "Gagal Mengubah Data";
   }
-  echo '<meta http-equiv="refresh" content="0;url=?page=suplierread"/>';
+  echo '<meta http-equiv="refresh" content="0;url=?page=pelangganread"/>';
   exit;
 }
 
@@ -80,6 +82,29 @@ if (isset($_GET['id'])) {
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="tgl_lahir">Tanggal Lahir</label>
+              <input type="date" name="tgl_lahir" class="form-control" value="<?= $row['tgl_lahir'] ?>" style="text-transform: uppercase;" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+          <div class="form-group">
+              <label for="jenis_kelamin">Jenis Kelamin</label>
+              <select name="jenis_kelamin" class="form-control" required>
+                <option value="">--Pilih Jenis Kelamin--</option>
+                <?php
+                $options = array('LAKI-LAKI', 'PEREMPUAN',);
+                foreach ($options as $option) {
+                  $selected = $row['jenis_kelamin'] == $option ? 'selected' : '';
+                  echo "<option value=\"" . $option . "\"" . $selected . ">" . $option . "</option>";
+                }
+                ?>
+              </select>
+            </div>
+          </div>
+        </div>
         <div class="form-group">
           <label for="alamat">Alamat</label>
           <br>
@@ -88,7 +113,7 @@ if (isset($_GET['id'])) {
         <div class="col-md-6">
             <div class="form-group">
               <label for="no_telp">No Telpon</label>
-              <input type="text" name="no_telp" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['no_telp'] : '' ?>" style="text-transform: uppercase;" required>
+              <input type="text" name="no_telp" class="form-control" value="<?= $row['no_telp'] ?>" style="text-transform: uppercase;" required>
             </div>
           </div>
         <a href="?page=pelangganread" class="btn btn-danger btn-sm float-right mt-2">

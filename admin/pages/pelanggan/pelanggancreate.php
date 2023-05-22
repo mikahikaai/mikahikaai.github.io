@@ -3,12 +3,14 @@ $database = new Database;
 $db = $database->getConnection();
 
 if (isset($_POST['button_create'])) {
-  $insertsql = "INSERT INTO data_pelanggan (id_pelanggan, nama, no_ktp, alamat, no_telp) values (NULL,?,?,?,?)";
+  $insertsql = "INSERT INTO data_pelanggan (id_pelanggan, nama, tgl_lahir, jenis_kelamin, no_ktp, alamat, no_telp) values (NULL,?,?,?,?,?,?)";
   $stmt = $db->prepare($insertsql);
   $stmt->bindParam(1, $_POST['nama']);
-  $stmt->bindParam(2, $_POST['no_ktp']);
-  $stmt->bindParam(3, $_POST['alamat']);
-  $stmt->bindParam(4, $_POST['no_telp']);
+  $stmt->bindParam(2, $_POST['tgl_lahir']);
+  $stmt->bindParam(3, $_POST['jenis_kelamin']);
+  $stmt->bindParam(4, $_POST['no_ktp']);
+  $stmt->bindParam(5, $_POST['alamat']);
+  $stmt->bindParam(6, $_POST['no_telp']);
   if ($stmt->execute()) {
     $_SESSION['hasil_create'] = true;
     $_SESSION['pesan'] = "Berhasil Menyimpan Data";
@@ -16,7 +18,7 @@ if (isset($_POST['button_create'])) {
     $_SESSION['hasil_create'] = false;
     $_SESSION['pesan'] = "Gagal Menyimpan Data";
   }
-  echo '<meta http-equiv="refresh" content="0;url=?page=suplierread"/>';
+  echo '<meta http-equiv="refresh" content="0;url=?page=pelangganread"/>';
   exit;
 }
 ?>
@@ -65,6 +67,29 @@ if (isset($_POST['button_create'])) {
             <div class="form-group">
               <label for="no_ktp">No KTP</label>
               <input type="text" name="no_ktp" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['no_ktp'] : '' ?>" style="text-transform: uppercase;" required>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="tgl_lahir">Tanggal Lahir</label>
+              <input type="date" name="tgl_lahir" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['tgl_lahir'] : '' ?>" style="text-transform: uppercase;" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+          <div class="form-group">
+              <label for="jenis_kelamin">Jenis Kelamin</label>
+              <select name="jenis_kelamin" class="form-control" required>
+                <option value="">--Pilih Jenis Kelamin--</option>
+                <?php
+                $options = array('LAKI - LAKI', 'PEREMPUAN',);
+                foreach ($options as $option) {
+                  $selected = $_POST['jenis_kelamin'] == $option ? 'selected' : '';
+                  echo "<option value=\"" . $option . "\"" . $selected . ">" . $option . "</option>";
+                }
+                ?>
+              </select>
             </div>
           </div>
         </div>

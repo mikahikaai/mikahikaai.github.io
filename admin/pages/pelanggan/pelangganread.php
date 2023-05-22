@@ -79,8 +79,11 @@ if (isset($_SESSION['hasil'])) {
           <tr>
             <th>No.</th>
             <th>Nama Pelanggan</th>
+            <th>Tanggal Lahir</th>
+            <th>Jenis Kelamin</th>
             <th>No KTP</th>
             <th>Alamat</th>
+            <th>No Telepon</th>
             <th style="display: flex;">Opsi</th>
           </tr>
         </thead>
@@ -102,8 +105,10 @@ if (isset($_SESSION['hasil'])) {
             <tr>
               <td><?= $no++ ?></td>
               <td style="text-transform: uppercase;"><?= $row['nama'] ?></td>
+              <td><?= $row['tgl_lahir'] ?></td>
+              <td style="text-transform: uppercase;"><?= $row['jenis_kelamin'] ?></td>
               <td><?= $row['no_ktp'] ?></td>
-              <td><?= $row['alamat'] ?></td>
+              <td style="text-transform: uppercase;"><?= $row['alamat'] ?></td>
               <td><?= $row['no_telp'] ?></td>
               <td>
                 <a href="?page=pelanggandetail&id=<?= $row['id_pelanggan']; ?>" class="btn btn-success btn-sm mr-1">
