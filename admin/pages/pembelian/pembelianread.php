@@ -48,12 +48,12 @@ if (isset($_SESSION['hasil'])) {
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0">Dokter</h1>
+        <h1 class="m-0">Pembelian</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="?page=home">Home</a></li>
-          <li class="breadcrumb-item active">Data Dokter</li>
+          <li class="breadcrumb-item active">Pembelian</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -65,11 +65,11 @@ if (isset($_SESSION['hasil'])) {
 <div class="content">
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Data Dokter</h3>
-      <a href="report/reportrekapdokter.php" target="_blank" class="btn btn-warning btn-sm float-right">
+      <h3 class="card-title">Data Pembelian</h3>
+      <a href="report/reportrekappembelian.php" target="_blank" class="btn btn-warning btn-sm float-right">
         <i class="fa fa-file-pdf"></i> Export PDF
       </a>
-      <a href="?page=doktercreate" class="btn btn-success btn-sm mr-2 float-right">
+      <a href="?page=pembeliancreate" class="btn btn-success btn-sm mr-2 float-right">
         <i class="fa fa-plus-circle"></i> Tambah Data
       </a>
     </div>
@@ -78,10 +78,15 @@ if (isset($_SESSION['hasil'])) {
         <thead>
           <tr>
             <th>No.</th>
-            <th>Nama Dokter</th>
-            <th>Spesialis</th>
-            <th>Alamat</th>
-            <th>No Telepon</th>
+            <th>No Faktur</th>
+            <th>Tanggal Faktur</th>
+            <th>Nama Obat</th>
+            <th>Qty</th>
+            <th>Harga Pembelian</th>
+            <th>Expired Obat</th>
+            <th>Nama Suplier</th>
+            <th>Tanggal Jatuh Tempo</th>
+            <th>Jenis Pembelian</th>
             <th style="display: flex;">Opsi</th>
           </tr>
         </thead>
@@ -90,7 +95,7 @@ if (isset($_SESSION['hasil'])) {
           $database = new Database;
           $db = $database->getConnection();
 
-          $selectsql = 'SELECT * FROM data_dokter order by nama_dokter asc';
+          $selectsql = 'SELECT * FROM pembelian p inner join obat o on p.id_obat = o.id_obat inner join suplier s on p.id_suplier = s.id_suplier order by no_faktur asc';
           $stmt = $db->prepare($selectsql);
           $stmt->execute();
 
@@ -102,18 +107,23 @@ if (isset($_SESSION['hasil'])) {
           ?>
             <tr>
               <td><?= $no++ ?></td>
-              <td style="text-transform: uppercase;"><?= $row['nama_dokter'] ?></td>
-              <td style="text-transform: uppercase;"><?= $row['spesialis'] ?></td>
-              <td style="text-transform: uppercase;"><?= $row['alamat'] ?></td>
-              <td><?= $row['no_telp'] ?></td>
+              <td style="text-transform: uppercase;"><?= $row['no_faktur'] ?></td>
+              <td><?= $row['tgl_pembelian'] ?></td>
+              <td><?= $row['nama_obat'] ?></td>
+              <td><?= $row['jumlah'] ?></td>
+              <td><?= 'Rp. ' . number_format($row['harga'], 0, ',', '.') ?></td>
+              <td><?= $row['ex_obat'] ?></td>
+              <td><?= $row['nama_suplier'] ?></td>
+              <td><?= $row['tgl_jatuh_tempo'] ?></td>
+              <td style="text-transform: uppercase;"><?= $row['jenis_pembelian'] ?></td>
               <td>
-                <a href="?page=dokterdetail&id=<?= $row['id_dokter']; ?>" class="btn btn-success btn-sm mr-1">
+                <a href="?page=pembeliandetail&id=<?= $row['id_pembelian']; ?>" class="btn btn-success btn-sm mr-1">
                   <i class="fa fa-eye"></i> Lihat
                 </a>
-                <a href="?page=dokterupdate&id=<?= $row['id_dokter']; ?>" class="btn btn-primary btn-sm mr-1">
+                <a href="?page=pembelianupdate&id=<?= $row['id_pembelian']; ?>" class="btn btn-primary btn-sm mr-1">
                   <i class="fa fa-edit"></i> Ubah
                 </a>
-                <a href="?page=dokterdelete&id=<?= $row['id_dokter']; ?>" class="btn btn-danger btn-sm mr-1" id='deletedokter'>
+                <a href="?page=pembeliandelete&id=<?= $row['id_pembelian']; ?>" class="btn btn-danger btn-sm mr-1" id='deletepembelian'>
                   <i class="fa fa-trash"></i> Hapus
                 </a>
               </td>
@@ -130,7 +140,7 @@ include_once "../partials/scriptdatatables.php";
 ?>
 <script>
   $(function() {
-    $('a#deletedokter').click(function(e) {
+    $('a#deletepembelian').click(function(e) {
       e.preventDefault();
       var urlToRedirect = e.currentTarget.getAttribute('href');
       //use currentTarget because the click may be on the nested i tag and not a tag causing the href to be empty

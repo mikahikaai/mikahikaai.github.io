@@ -58,7 +58,7 @@
             </a>
           </li>
           <li class="nav-item" id="pembelian">
-            <a href="#" class="nav-link" id="link_pembelian">
+            <a href="?page=pembelianread" class="nav-link" id="link_pembelian">
               <i class="nav-icon fas fa-dollar"></i>
               <p>
                 Pembelian

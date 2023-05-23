@@ -111,7 +111,7 @@ if (isset($_SESSION['hasil'])) {
                 <a href="?page=suplierupdate&id=<?= $row['id_suplier']; ?>" class="btn btn-primary btn-sm mr-1">
                   <i class="fa fa-edit"></i> Ubah
                 </a>
-                <a href="?page=suplierdelete&id=<?= $row['id_suplier']; ?>" class="btn btn-danger btn-sm mr-1" id='deleteobat'>
+                <a href="?page=suplierdelete&id=<?= $row['id_suplier']; ?>" class="btn btn-danger btn-sm mr-1" id='deletesuplier'>
                   <i class="fa fa-trash"></i> Hapus
                 </a>
               </td>
@@ -128,7 +128,7 @@ include_once "../partials/scriptdatatables.php";
 ?>
 <script>
   $(function() {
-    $('a#deleteobat').click(function(e) {
+    $('a#deletesuplier').click(function(e) {
       e.preventDefault();
       var urlToRedirect = e.currentTarget.getAttribute('href');
       //use currentTarget because the click may be on the nested i tag and not a tag causing the href to be empty

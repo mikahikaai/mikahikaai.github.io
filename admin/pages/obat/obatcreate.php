@@ -3,16 +3,15 @@ $database = new Database;
 $db = $database->getConnection();
 
 if (isset($_POST['button_create'])) {
-  $insertsql = "INSERT INTO obat (id_obat, nama_obat, jenis_obat, harga_jual, harga_beli, minimal_stok, stok_obat, khasiat, ket) values (NULL,?,?,?,?,?,?,?,?)";
+  $insertsql = "INSERT INTO obat (id_obat, nama_obat, jenis_obat, harga_jual, minimal_stok, stok_obat, khasiat, ket) values (NULL,?,?,?,?,?,?,?)";
   $stmt = $db->prepare($insertsql);
   $stmt->bindParam(1, $_POST['nama_obat']);
   $stmt->bindParam(2, $_POST['jenis_obat']);
   $stmt->bindParam(3, $_POST['harga_jual']);
-  $stmt->bindParam(4, $_POST['harga_beli']);
-  $stmt->bindParam(5, $_POST['minimal_stok']);
-  $stmt->bindParam(6, $_POST['stok_obat']);
-  $stmt->bindParam(7, $_POST['khasiat']);
-  $stmt->bindParam(8, $_POST['ket']);
+  $stmt->bindParam(4, $_POST['minimal_stok']);
+  $stmt->bindParam(5, $_POST['stok_obat']);
+  $stmt->bindParam(6, $_POST['khasiat']);
+  $stmt->bindParam(7, $_POST['ket']);
   if ($stmt->execute()) {
     $_SESSION['hasil_create'] = true;
     $_SESSION['pesan'] = "Berhasil Menyimpan Data";
@@ -84,20 +83,6 @@ if (isset($_POST['button_create'])) {
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="harga_jual">Harga Jual</label>
-              <input type="number" name="harga_jual" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['harga_jual'] : '' ?>" style="text-transform: uppercase;" required>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="harga_beli">Harga Beli</label>
-              <input type="number" name="harga_beli" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['harga_beli'] : '' ?>" style="text-transform: uppercase;" required>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
               <label for="minimal_stok">Minimal Stok</label>
               <input type="number" name="minimal_stok" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['minimal_stok'] : '' ?>" style="text-transform: uppercase;" required>
             </div>
@@ -109,6 +94,15 @@ if (isset($_POST['button_create'])) {
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="harga_jual">Harga Jual</label>
+              <input type="number" name="harga_jual" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['harga_jual'] : '' ?>" style="text-transform: uppercase;" required>
+            </div>
+          </div>
+        </div>
+        
         <div class="form-group">
           <label for="khasiat">Khasiat</label>
           <br>

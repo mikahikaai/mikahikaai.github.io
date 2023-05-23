@@ -81,7 +81,6 @@ if (isset($_SESSION['hasil'])) {
             <th>Nama Obat</th>
             <th>Jenis Obat</th>
             <th>Harga Jual</th>
-            <th>Harga Beli</th>
             <th>Minimal Stok</th>
             <th>Stok Obat</th>
             <th>Khasiat</th>
@@ -109,7 +108,6 @@ if (isset($_SESSION['hasil'])) {
               <td style="text-transform: uppercase;"><?= $row['nama_obat'] ?></td>
               <td><?= $row['jenis_obat'] ?></td>
               <td><?= 'Rp. ' . number_format($row['harga_jual'], 0, ',', '.') ?></td>
-              <td><?= 'Rp. ' . number_format($row['harga_beli'], 0, ',', '.') ?></td>
               <td><?= $row['minimal_stok'] ?></td>
               <td><?= $row['stok_obat'] ?></td>
               <td><?= $row['khasiat'] ?></td>

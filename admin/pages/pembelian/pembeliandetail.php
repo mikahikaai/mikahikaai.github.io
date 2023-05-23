@@ -70,6 +70,20 @@ if (isset($_GET['id'])) {
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
+            <label for="harga_jual">Harga Jual</label>
+            <input type="number" name="harga_jual" class="form-control" value="<?= $row['harga_jual'] ?>" style="text-transform: uppercase;" readonly>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="harga_beli">Harga Beli</label>
+            <input type="number" name="harga_beli" class="form-control" value="<?= $row['harga_beli'] ?>" style="text-transform: uppercase;" readonly>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
             <label for="minimal_stok">Minimal Stok</label>
             <input type="number" name="minimal_stok" class="form-control" value="<?= $row['minimal_stok'] ?>" style="text-transform: uppercase;" readonly>
           </div>
@@ -78,14 +92,6 @@ if (isset($_GET['id'])) {
           <div class="form-group">
             <label for="stok_obat">Stok Obat</label>
             <input type="number" name="stok_obat" class="form-control" value="<?= $row['stok_obat'] ?>" style="text-transform: uppercase;" readonly>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="harga_jual">Harga Jual</label>
-            <input type="number" name="harga_jual" class="form-control" value="<?= $row['harga_jual'] ?>" style="text-transform: uppercase;" readonly>
           </div>
         </div>
       </div>

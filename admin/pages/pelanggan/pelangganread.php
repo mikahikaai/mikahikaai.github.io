@@ -134,7 +134,7 @@ include_once "../partials/scriptdatatables.php";
 ?>
 <script>
   $(function() {
-    $('a#deleteobat').click(function(e) {
+    $('a#deletepelanggan').click(function(e) {
       e.preventDefault();
       var urlToRedirect = e.currentTarget.getAttribute('href');
       //use currentTarget because the click may be on the nested i tag and not a tag causing the href to be empty

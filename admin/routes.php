@@ -90,7 +90,27 @@ if (isset($_GET['page'])) {
       file_exists('pages/dokter/dokterdetail.php') ? include 'pages/dokter/dokterdetail.php' : include '../pages/404.php';
       $title = 'Dokter';
       break;
-
+    case 'pembelianread':
+      file_exists('pages/pembelian/pembelianread.php') ? include 'pages/pembelian/pembelianread.php' : include '../pages/404.php';
+      $title = 'Pembelian';
+      break;
+    case 'pembeliancreate':
+      file_exists('pages/pembelian/pembeliancreate.php') ? include 'pages/pembelian/pembeliancreate.php' : include '../pages/404.php';
+      $title = 'Pembelian';
+      break;
+    case 'pembelianupdate':
+      file_exists('pages/pembelian/pembelianupdate.php') ? include 'pages/pembelian/pembelianupdate.php' : include '../pages/404.php';
+      $title = 'Pembelian';
+      break;
+    case 'pembeliandelete':
+      file_exists('pages/pembelian/pembeliandelete.php') ? include 'pages/pembelian/pembeliandelete.php' : include '../pages/404.php';
+      $title = 'Pembelian';
+      break;
+    case 'pembeliandetail':
+      file_exists('pages/pembelian/pembeliandetail.php') ? include 'pages/pembelian/pembeliandetail.php' : include '../pages/404.php';
+      $title = 'Pembelian';
+      break;
+      
     case 'armadaread':
       file_exists('pages/armada/armadaread.php') ? include 'pages/armada/armadaread.php' : include '../pages/404.php';
       $title = 'Armada';
