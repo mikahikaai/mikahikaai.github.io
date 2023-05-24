@@ -110,7 +110,11 @@ if (isset($_GET['page'])) {
       file_exists('pages/pembelian/pembeliandetail.php') ? include 'pages/pembelian/pembeliandetail.php' : include '../pages/404.php';
       $title = 'Pembelian';
       break;
-      
+    case 'dopembeliancreate':
+      file_exists('pages/pembelian/dopembeliancreate.php') ? include 'pages/pembelian/dopembeliancreate.php' : include '../pages/404.php';
+      $title = 'Pembelian';
+      break;
+
     case 'armadaread':
       file_exists('pages/armada/armadaread.php') ? include 'pages/armada/armadaread.php' : include '../pages/404.php';
       $title = 'Armada';

@@ -67,7 +67,7 @@ $stmt_obat->execute();
       <h3 class="card-title">Data Tambah Pembelian</h3>
     </div>
     <div class="card-body">
-      <form action="" method="post">
+      <form action="?page=dopembeliancreate" method="post">
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
@@ -105,8 +105,8 @@ $stmt_obat->execute();
               <div class="row">
                 <div class="col-md">
                   <div class="form-group">
-                    <label for="nama_obat">Nama Obat</label>
-                    <select name="obat" class="form-control" required>
+                    <label for="id_obat[]">Nama Obat</label>
+                    <select name="id_obat[]" class="form-control" required>
                       <option value=""></option>
                       <?php
                       while ($rowobat = $stmt_obat->fetch(PDO::FETCH_ASSOC)) { ?>
@@ -118,21 +118,27 @@ $stmt_obat->execute();
                 </div>
                 <div class="col-md">
                   <div class="form-group">
-                    <label for="jumlah">Jumlah</label>
-                    <input type="number" name="jumlah" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah'] : '' ?>" style="text-transform: uppercase;" required>
+                    <label for="jumlah[]">Jumlah</label>
+                    <input type="number" name="jumlah[]" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah'] : '' ?>" style="text-transform: uppercase;" required>
                   </div>
                 </div>
                 <div class="col-md">
                   <div class="form-group">
-                    <label for="harga">Harga</label>
-                    <input type="number" name="harga" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah'] : '' ?>" style="text-transform: uppercase;" required>
+                    <label for="harga[]">Harga</label>
+                    <input type="number" name="harga[]" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah'] : '' ?>" style="text-transform: uppercase;" required>
                   </div>
                 </div>
                 <div class="col-md">
                   <div class="form-group">
-                    <label for="ex_obat">Expired</label>
+                    <label for="subtotal">Total</label>
+                    <input type="number" name="subtotal" class="form-control" value="0" style="text-transform: uppercase;" readonly>
+                  </div>
+                </div>
+                <div class="col-md">
+                  <div class="form-group">
+                    <label for="ex_obat[]">Expired</label>
                     <div class="input-group">
-                      <input type="date" name="ex_obat" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah'] : '' ?>" style="text-transform: uppercase;" required>
+                      <input type="date" name="ex_obat[]" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah'] : '' ?>" style="text-transform: uppercase;" required>
                       <div class="input-group-append ml-3">
                         <button type="button" class="btn btn-sm btn-danger form-control" name="hapus_pembelian"><i class="fa fa-times"></i></button>
                       </div>
@@ -143,13 +149,27 @@ $stmt_obat->execute();
             </div>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="form-group">
-            <label for="jenis_pembelian">Jenis Transaksi</label>
-            <select name="jenis_pembelian" class="form-control" required>
-              <option value="tunai">Tunai</option>
-              <option value="kredit">Kredit</option>
-            </select>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="jenis_pembelian">Jenis Transaksi</label>
+              <select name="jenis_pembelian" class="form-control" required>
+                <option value="tunai">Tunai</option>
+                <option value="kredit">Kredit</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="tgl_jatuh_tempo">Tanggal Jatuh Tempo</label>
+              <input type="date" name="tgl_jatuh_tempo" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="total">Total Pembelian</label>
+              <input type="number" name="total" class="form-control" value="0" readonly>
+            </div>
           </div>
         </div>
         <a href="?page=pembelianread" class="btn btn-danger btn-sm float-right mt-2">
@@ -174,10 +194,11 @@ include_once "../partials/scriptdatatables.php";
     html += '<div class="row">';
     html += '<div class="col-md">';
     html += '<div class="form-group">';
-    html += '<label for="nama_obat">Nama Obat</label>';
-    html += '<select name="obat" class="form-control" required>';
+    html += '<label for="id_obat[]">Nama Obat</label>';
+    html += '<select name="id_obat[]" class="form-control" required>';
     html += '<option value=""></option>';
-    html += '<?php $stmt_obat->execute(); while ($rowobat = $stmt_obat->fetch(PDO::FETCH_ASSOC)) { ?>';
+    html += '<?php $stmt_obat->execute();
+              while ($rowobat = $stmt_obat->fetch(PDO::FETCH_ASSOC)) { ?>';
     html += '<option value=<?= $rowobat["id_obat"] ?>><?= strtoupper($rowobat["nama_obat"]) ?></option>';
     html += '<?php }; ?>';
     html += '</select>';
@@ -185,21 +206,27 @@ include_once "../partials/scriptdatatables.php";
     html += '</div>';
     html += '<div class="col-md">';
     html += '<div class="form-group">';
-    html += '<label for="jumlah">Jumlah</label>';
-    html += '<input type="number" name="jumlah" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah'] : '' ?>" style="text-transform: uppercase;" required>';
+    html += '<label for="jumlah[]">Jumlah</label>';
+    html += '<input type="number" name="jumlah[]" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah'] : '' ?>" style="text-transform: uppercase;" required>';
     html += '</div>';
     html += '</div>';
     html += '<div class="col-md">';
     html += '<div class="form-group">';
-    html += '<label for="harga">Harga</label>';
-    html += '<input type="number" name="harga" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah'] : '' ?>" style="text-transform: uppercase;" required>';
+    html += '<label for="harga[]">Harga</label>';
+    html += '<input type="number" name="harga[]" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah'] : '' ?>" style="text-transform: uppercase;" required>';
     html += '</div>';
     html += '</div>';
     html += '<div class="col-md">';
     html += '<div class="form-group">';
-    html += '<label for="ex_obat">Expired</label>';
+    html += '<label for="subtotal">Total</label>';
+    html += '<input type="number" name="subtotal" class="form-control" value="0" style="text-transform: uppercase;" readonly>';
+    html += '</div>';
+    html += '</div>';
+    html += '<div class="col-md">';
+    html += '<div class="form-group">';
+    html += '<label for="ex_obat[]">Expired</label>';
     html += '<div class="input-group">';
-    html += '<input type="date" name="ex_obat" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah'] : '' ?>" style="text-transform: uppercase;" required>';
+    html += '<input type="date" name="ex_obat[]" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah'] : '' ?>" style="text-transform: uppercase;" required>';
     html += '<div class="input-group-append ml-3">';
     html += '<button type="button" class="btn btn-sm btn-danger form-control" name="hapus_pembelian"><i class="fa fa-times"></i></button>';
     html += '</div>';
@@ -211,7 +238,39 @@ include_once "../partials/scriptdatatables.php";
     $('#dinamis').append(html);
   });
 
+  // var total = 0;
+
   $(document).on('click', 'button[name="hapus_pembelian"]', function(e) {
     $(e.target).closest('.row').remove();
+    var total = 0;
+    $('input[name="subtotal"]').each(function(){
+      total += parseInt($(this).val());
+    });
+    // console.log(total);
+    $("input[name='total']").val(total);
+  });
+
+  $(document).on('change', 'input[name="harga[]"]', function(e) {
+    var currentJumlah = $(e.target).parents('.row').find('input[name="jumlah[]"]').val();
+    var currentHarga = $(e.target).parents('.row').find('input[name="harga[]"]').val();
+    $(e.target).parents('.row').find("input[name='subtotal']").val(currentHarga * currentJumlah);
+    var total = 0;
+    $('input[name="subtotal"]').each(function(){
+      total += parseInt($(this).val());
+    });
+    // console.log(total);
+    $("input[name='total']").val(total).trigger('change');
+  });
+
+  $(document).on('change', 'input[name="jumlah[]"]', function(e) {
+    var currentJumlah = $(e.target).parents('.row').find('input[name="jumlah[]"]').val();
+    var currentHarga = $(e.target).parents('.row').find('input[name="harga[]"]').val();
+    $(e.target).parents('.row').find("input[name='subtotal']").val(currentHarga * currentJumlah);
+    var total = 0;
+    $('input[name="subtotal"]').each(function(){
+      total += parseInt($(this).val());
+    });
+    // console.log(total);
+    $("input[name='total']").val(total).trigger('change');
   });
 </script>

@@ -83,6 +83,7 @@ if (isset($_SESSION['hasil'])) {
             <th>Nama Obat</th>
             <th>Qty</th>
             <th>Harga Pembelian</th>
+            <th>Total</th>
             <th>Expired Obat</th>
             <th>Nama Suplier</th>
             <th>Tanggal Jatuh Tempo</th>
@@ -112,6 +113,7 @@ if (isset($_SESSION['hasil'])) {
               <td><?= $row['nama_obat'] ?></td>
               <td><?= $row['jumlah'] ?></td>
               <td><?= 'Rp. ' . number_format($row['harga'], 0, ',', '.') ?></td>
+              <td><?= 'Rp. ' . number_format($row['harga']*$row['jumlah'], 0, ',', '.') ?></td>
               <td><?= $row['ex_obat'] ?></td>
               <td><?= $row['nama_suplier'] ?></td>
               <td><?= $row['tgl_jatuh_tempo'] ?></td>
