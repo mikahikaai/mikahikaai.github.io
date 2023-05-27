@@ -15,7 +15,7 @@ $db = $database->getConnection();
 // var_dump($_SESSION['status_kedatangan_obat']);
 // die();
 
-$selectsql = "SELECT * FROM obat ORDER BY nama_obat ASC";
+$selectsql = 'SELECT * FROM pembelian p inner join obat o on p.id_obat = o.id_obat inner join suplier s on p.id_suplier = s.id_suplier ORDER BY no_faktur ASC';
 $stmt = $db->prepare($selectsql);
 $stmt->execute();
 ?>
@@ -72,7 +72,7 @@ $stmt->execute();
 
 <table style="width: 100%; margin-bottom: 10px;">
   <tr>
-    <td align="center" style="font-weight: bold; padding-bottom: 20px; font-size: x-large;"><u>DATA REKAP OBAT</u></td>
+    <td align="center" style="font-weight: bold; padding-bottom: 20px; font-size: x-large;"><u>DATA REKAP PEMBELIAN</u></td>
   </tr>
 </table>
 
@@ -81,13 +81,16 @@ $stmt->execute();
   <thead>
     <tr>
       <th>No.</th>
+      <th>No Faktur</th>
+      <th>Tanggal Faktur</th>
       <th>Nama Obat</th>
-      <th>Jenis Obat</th>
-      <th>Harga Jual</th>
-      <th>Minimal Stok</th>
-      <th>Stok Obat</th>
-      <th>Khasiat</th>
-      <th>Keterangan</th>
+      <th>Qty</th>
+      <th>Harga Pembelian</th>
+      <th>Total</th>
+      <th>Expired Obat</th>
+      <th>Nama Suplier</th>
+      <th>Tanggal Jatuh Tempo</th>
+      <th>Jenis Pembelian</th>
     </tr>
   </thead>
   <tbody>
@@ -98,13 +101,16 @@ $stmt->execute();
     ?>
       <tr>
         <td><?= $no++ ?></td>
-        <td style="text-transform: uppercase;" ><?= $row['nama_obat'] ?></td>
-        <td><?= $row['jenis_obat'] ?></td>
-        <td><?= $row['harga_jual'] ?></td>
-        <td><?= $row['minimal_stok'] ?></td>
-        <td><?= $row['stok_obat'] ?></td>
-        <td><?= $row['khasiat'] ?></td>
-        <td><?= $row['ket'] ?></td>
+        <td style="text-transform: uppercase;"><?= $row['no_faktur'] ?></td>
+        <td><?= $row['tgl_pembelian'] ?></td>
+        <td><?= $row['nama_obat'] ?></td>
+        <td><?= $row['jumlah'] ?></td>
+        <td><?= $row['harga'] ?></td>
+        <td><?= $row['jumlah'] * $row['harga'] ?></td>
+        <td><?= $row['ex_obat'] ?></td>
+        <td><?= $row['nama_suplier'] ?></td>
+        <td><?= $row['tgl_jatuh_tempo'] ?></td>
+        <td><?= $row['jenis_pembelian'] ?></td>
       </tr>
     <?php } ?>
   </tbody>

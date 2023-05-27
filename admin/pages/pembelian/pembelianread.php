@@ -96,7 +96,7 @@ if (isset($_SESSION['hasil'])) {
           $database = new Database;
           $db = $database->getConnection();
 
-          $selectsql = 'SELECT * FROM pembelian p inner join obat o on p.id_obat = o.id_obat inner join suplier s on p.id_suplier = s.id_suplier order by no_faktur asc';
+          $selectsql = 'SELECT * FROM pembelian p inner join obat o on p.id_obat = o.id_obat inner join suplier s on p.id_suplier = s.id_suplier ORDER BY no_faktur ASC';
           $stmt = $db->prepare($selectsql);
           $stmt->execute();
 
@@ -110,7 +110,7 @@ if (isset($_SESSION['hasil'])) {
               <td><?= $no++ ?></td>
               <td style="text-transform: uppercase;"><?= $row['no_faktur'] ?></td>
               <td><?= $row['tgl_pembelian'] ?></td>
-              <td><?= $row['nama_obat'] ?></td>
+              <td style="text-transform: uppercase;"><?= $row['nama_obat'] ?></td>
               <td><?= $row['jumlah'] ?></td>
               <td><?= 'Rp. ' . number_format($row['harga'], 0, ',', '.') ?></td>
               <td><?= 'Rp. ' . number_format($row['harga']*$row['jumlah'], 0, ',', '.') ?></td>
@@ -119,13 +119,13 @@ if (isset($_SESSION['hasil'])) {
               <td><?= $row['tgl_jatuh_tempo'] ?></td>
               <td style="text-transform: uppercase;"><?= $row['jenis_pembelian'] ?></td>
               <td>
-                <a href="?page=pembeliandetail&id=<?= $row['id_pembelian']; ?>" class="btn btn-success btn-sm mr-1">
+                <a href="?page=pembeliandetail&id=<?= $row['no_faktur']; ?>" class="btn btn-success btn-sm mr-1">
                   <i class="fa fa-eye"></i> Lihat
                 </a>
-                <a href="?page=pembelianupdate&id=<?= $row['id_pembelian']; ?>" class="btn btn-primary btn-sm mr-1">
+                <a href="?page=pembelianupdate&id=<?= $row['no_faktur']; ?>" class="btn btn-primary btn-sm mr-1">
                   <i class="fa fa-edit"></i> Ubah
                 </a>
-                <a href="?page=pembeliandelete&id=<?= $row['id_pembelian']; ?>" class="btn btn-danger btn-sm mr-1" id='deletepembelian'>
+                <a href="?page=pembeliandelete&id=<?= $row['no_faktur']; ?>" class="btn btn-danger btn-sm mr-1" id='deletepembelian'>
                   <i class="fa fa-trash"></i> Hapus
                 </a>
               </td>
@@ -148,7 +148,7 @@ include_once "../partials/scriptdatatables.php";
       //use currentTarget because the click may be on the nested i tag and not a tag causing the href to be empty
       Swal.fire({
         title: 'Apakah anda yakin?',
-        text: "Data yang dihapus tidak dapat kembali!",
+        text: "Data dengan nomor faktur yang sama akan ikut terhapus!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

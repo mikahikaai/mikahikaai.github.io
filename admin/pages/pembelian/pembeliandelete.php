@@ -2,7 +2,7 @@
 $database = new Database;
 $db = $database->getConnection();
     if(isset($_GET['id'])){
-        $deletesql = "DELETE from pembelian where id_pembelian=?"; 
+        $deletesql = "DELETE from pembelian where no_faktur=?"; 
         $stmt = $db->prepare($deletesql);
         $stmt->bindParam(1, $_GET['id']);
     }
