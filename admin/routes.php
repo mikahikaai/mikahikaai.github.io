@@ -118,6 +118,26 @@ if (isset($_GET['page'])) {
       file_exists('pages/pembelian/dopembelianupdate.php') ? include 'pages/pembelian/dopembelianupdate.php' : include '../pages/404.php';
       $title = 'Pembelian';
       break;
+    case 'pelayananread':
+      file_exists('pages/pelayanan/pelayananread.php') ? include 'pages/pelayanan/pelayananread.php' : include '../pages/404.php';
+      $title = 'Pelayanan';
+      break;
+    case 'pelayanancreate':
+      file_exists('pages/pelayanan/pelayanancreate.php') ? include 'pages/pelayanan/pelayanancreate.php' : include '../pages/404.php';
+      $title = 'Pelayanan';
+      break;
+    case 'pelayananupdate':
+      file_exists('pages/pelayanan/pelayananupdate.php') ? include 'pages/pelayanan/pelayananupdate.php' : include '../pages/404.php';
+      $title = 'Pelayanan';
+      break;
+    case 'pelayanandelete':
+      file_exists('pages/pelayanan/pelayanandelete.php') ? include 'pages/pelayanan/pelayanandelete.php' : include '../pages/404.php';
+      $title = 'Pelayanan';
+      break;
+    case 'pelayanandetail':
+      file_exists('pages/pelayanan/pelayanandetail.php') ? include 'pages/pelayanan/pelayanandetail.php' : include '../pages/404.php';
+      $title = 'Pelayanan';
+      break;
 
     case 'armadaread':
       file_exists('pages/armada/armadaread.php') ? include 'pages/armada/armadaread.php' : include '../pages/404.php';

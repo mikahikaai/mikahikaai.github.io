@@ -50,7 +50,7 @@
       if ($_SESSION['level'] == 'Admin') {
         ?>
           <li class="nav-item" id="pelayanan">
-            <a href="#" class="nav-link" id="link_pelayanan">
+            <a href="?page=pelayananread" class="nav-link" id="link_pelayanan">
               <i class="nav-icon fas fa-hand"></i>
               <p>
                 Pelayanan
