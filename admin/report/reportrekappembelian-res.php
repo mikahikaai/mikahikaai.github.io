@@ -26,6 +26,7 @@ $stmt->execute();
     /* table-layout: fixed; */
     width: 100%;
     margin-bottom: 30px;
+ 
   }
 
   table#content th {
@@ -105,8 +106,8 @@ $stmt->execute();
         <td><?= $row['tgl_pembelian'] ?></td>
         <td><?= $row['nama_obat'] ?></td>
         <td><?= $row['jumlah'] ?></td>
-        <td><?= $row['harga'] ?></td>
-        <td><?= $row['jumlah'] * $row['harga'] ?></td>
+        <td><?= 'Rp. ' . number_format($row['harga'],0,',','.')?></td>
+        <td style="white-space:nowrap"><?= 'Rp. ' . number_format($row['jumlah'] * $row['harga'],0,',','.') ?></td>
         <td><?= $row['ex_obat'] ?></td>
         <td><?= $row['nama_suplier'] ?></td>
         <td><?= $row['tgl_jatuh_tempo'] ?></td>

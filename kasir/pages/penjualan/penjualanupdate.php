@@ -2,18 +2,18 @@
 $database = new Database;
 $db = $database->getConnection();
 
-$selectsupliersql = "SELECT * FROM suplier";
-$stmt_suplier = $db->prepare($selectsupliersql);
-$stmt_suplier->execute();
+$selectpelanggansql = "SELECT * FROM data_pelanggan";
+$stmt_pelanggan = $db->prepare($selectpelanggansql);
+$stmt_pelanggan->execute();
 
 $selectobatsql = "SELECT * FROM obat";
 $stmt_obat = $db->prepare($selectobatsql);
 
-$selectpembeliansql = "SELECT * FROM pembelian WHERE no_faktur=?";
-$stmt_pembelian = $db->prepare($selectpembeliansql);
-$stmt_pembelian->bindParam(1, $_GET['id']);
-$stmt_pembelian->execute();
-$rowpembelian = $stmt_pembelian->fetch(PDO::FETCH_ASSOC);
+$selectpenjualansql = "SELECT * FROM penjualan pj INNER join obat o on pj.id_obat = o.id_obat WHERE no_penjualan=?";
+$stmt_penjualan = $db->prepare($selectpenjualansql);
+$stmt_penjualan->bindParam(1, $_GET['id']);
+$stmt_penjualan->execute();
+$rowpenjualan = $stmt_penjualan->fetch(PDO::FETCH_ASSOC);
 
 
 ?>
@@ -29,13 +29,13 @@ $rowpembelian = $stmt_pembelian->fetch(PDO::FETCH_ASSOC);
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0">Pembelian</h1>
+        <h1 class="m-0">Penjualan</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="?page=home">Home</a></li>
-          <li class="breadcrumb-item"><a href="?page=pembelianread">Pembelian</a></li>
-          <li class="breadcrumb-item">Tambah Pembelian</li>
+          <li class="breadcrumb-item"><a href="?page=penjualanread">Penjualan</a></li>
+          <li class="breadcrumb-item">Ubah Penjualan</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -47,25 +47,25 @@ $rowpembelian = $stmt_pembelian->fetch(PDO::FETCH_ASSOC);
 <div class="content">
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Data Tambah Pembelian</h3>
+      <h3 class="card-title">Ubah Data Penjualan</h3>
     </div>
     <div class="card-body">
-      <form action="?page=dopembelianupdate&&id=<?= $_GET['id']?>" method="post">
+      <form action="?page=dopenjualanupdate&&id=<?= $_GET['id'] ?>" method="post">
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
-              <label for="no_faktur">Nomor Faktur</label>
-              <input type="text" name="no_faktur" placeholder="Masukkan No. Faktur" class="form-control" value="<?= $_GET['id'] ?>">
+              <label for="no_penjualan">Nomor Penjualan</label>
+              <input name="no_penjualan" placeholder="Masukkan No. Penjualan" class="form-control" style="text-transform: uppercase;" value="<?= $_GET['id'] ?>"readonly>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label for="id_suplier">Pilih Nama Suplier</label>
-              <select name="id_suplier" class="form-control" required>
+              <label for="id_pelanggan">Pilih Nama Pelanggan</label>
+              <select style="text-transform: uppercase;" name="id_pelanggan" class="form-control" required>
                 <?php
-                while ($rowsuplier = $stmt_suplier->fetch(PDO::FETCH_ASSOC)) {
-                  $selected = $rowsuplier['id_suplier'] == $rowpembelian['id_suplier'] ? 'selected' : '' ?>
-                  <option <?= $selected ?> value=<?= $rowsuplier['id_suplier'] ?>><?= $rowsuplier['nama_suplier'] ?></option>
+                while ($rowpelanggan = $stmt_pelanggan->fetch(PDO::FETCH_ASSOC)) {
+                  $selected = $rowpelanggan['id_pelanggan'] == $rowpenjualan['id_pelanggan'] ? 'selected' : '' ?>
+                  <option <?= $selected ?> value=<?= $rowpelanggan['id_pelanggan'] ?>><?= $rowpelanggan['nama'] ?></option>
                 <?php };
                 ?>
               </select>
@@ -73,23 +73,23 @@ $rowpembelian = $stmt_pembelian->fetch(PDO::FETCH_ASSOC);
           </div>
           <div class="col-md-2">
             <div class="form-group">
-              <label for="tgl_pembelian">Tanggal Pembelian</label>
-              <input type="date" name="tgl_pembelian" class="form-control" value="<?= $rowpembelian['tgl_pembelian'] ?>">
+              <label for="tgl_penjualan">Tanggal Penjualan</label>
+              <input type="date" name="tgl_penjualan" class="form-control" value="<?= $rowpenjualan['tgl_penjualan'] ?>">
             </div>
           </div>
         </div>
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Pembelian Obat</h3>
-            <button type="button" class="btn btn-sm btn-success float-right" name="tambah_pembelian"><i class="fa fa-plus"></i></button>
+            <h3 class="card-title">Penjualan Obat</h3>
+            <button type="button" class="btn btn-sm btn-success float-right" name="tambah_penjualan"><i class="fa fa-plus"></i></button>
           </div>
           <div class="card-body">
             <div id="dinamis">
               <?php
-              $total_pembelian = 0;
-              $stmt_pembelian->execute();
-              while ($rowpembelian = $stmt_pembelian->fetch(PDO::FETCH_ASSOC)) {
-                $total_pembelian += $rowpembelian['jumlah'] * $rowpembelian['harga'] ?>
+              $total_penjualan = 0;
+              $stmt_penjualan->execute();
+              while ($rowpenjualan = $stmt_penjualan->fetch(PDO::FETCH_ASSOC)) {
+                $total_penjualan += $rowpenjualan['jumlah_obat'] * $rowpenjualan['harga_jual'] ?>
                 <div class="row">
                   <div class="col-md">
                     <div class="form-group">
@@ -99,7 +99,7 @@ $rowpembelian = $stmt_pembelian->fetch(PDO::FETCH_ASSOC);
                         <?php
                         $stmt_obat->execute();
                         while ($rowobat = $stmt_obat->fetch(PDO::FETCH_ASSOC)) {
-                          $selected = $rowobat['id_obat'] == $rowpembelian['id_obat'] ? 'selected' : '' ?>
+                          $selected = $rowobat['id_obat'] == $rowpenjualan['id_obat'] ? 'selected' : '' ?>
                           <option <?= $selected ?> value=<?= $rowobat['id_obat'] ?>><?= strtoupper($rowobat['nama_obat']) ?></option>
                         <?php };
                         ?>
@@ -108,29 +108,23 @@ $rowpembelian = $stmt_pembelian->fetch(PDO::FETCH_ASSOC);
                   </div>
                   <div class="col-md">
                     <div class="form-group">
-                      <label for="jumlah[]">Jumlah</label>
-                      <input type="number" name="jumlah[]" class="form-control" value="<?= $rowpembelian['jumlah'] ?>" required>
+                      <label for="jumlah_obat[]">Jumlah</label>
+                      <input type="number" name="jumlah_obat[]" class="form-control" value="<?= $rowpenjualan['jumlah_obat'] ?>" required>
                     </div>
                   </div>
                   <div class="col-md">
                     <div class="form-group">
                       <label for="harga[]">Harga</label>
-                      <input type="number" name="harga[]" class="form-control" value="<?= $rowpembelian['harga'] ?>" required>
+                      <input type="number" name="harga[]" class="form-control" value="<?= $rowpenjualan['harga_jual'] ?>" required>
                     </div>
                   </div>
                   <div class="col-md">
                     <div class="form-group">
                       <label for="subtotal">Total</label>
-                      <input type="number" name="subtotal" class="form-control" value="<?= $rowpembelian['jumlah'] * $rowpembelian['harga'] ?>" readonly>
-                    </div>
-                  </div>
-                  <div class="col-md">
-                    <div class="form-group">
-                      <label for="ex_obat[]">Expired</label>
                       <div class="input-group">
-                        <input type="date" name="ex_obat[]" class="form-control" value="<?= $rowpembelian['ex_obat'] ?>" required>
+                        <input type="number" name="subtotal" class="form-control" value="<?= $rowpenjualan['jumlah_obat'] * $rowpenjualan['harga_jual'] ?>" readonly>
                         <div class="input-group-append ml-3">
-                          <button type="button" class="btn btn-sm btn-danger form-control" name="hapus_pembelian"><i class="fa fa-times"></i></button>
+                          <button type="button" class="btn btn-sm btn-danger form-control" name="hapus_penjualan"><i class="fa fa-times"></i></button>
                         </div>
                       </div>
                     </div>
@@ -141,36 +135,17 @@ $rowpembelian = $stmt_pembelian->fetch(PDO::FETCH_ASSOC);
           </div>
         </div>
         <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-3"></div>
+          <div class="col-md-3"></div>
           <div class="col-md-3">
             <div class="form-group">
-              <label for="jenis_pembelian">Jenis Transaksi</label>
-              <select style="text-transform: uppercase;" name="jenis_pembelian" class="form-control" required>
-                <?php
-                $options = array('tunai', 'kredit');
-                foreach ($options as $option) {
-                  $stmt_pembelian->execute();
-                  $rowpembelian = $stmt_pembelian->fetch(PDO::FETCH_ASSOC);
-                  $selected = $rowpembelian['jenis_pembelian'] == $option ? 'selected' : '';
-                ?>
-                  <option style="text-transform: uppercase;" <?= $selected ?> value="<?= $option ?>"><?= $option ?></option>
-                <?php } ?>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label for="tgl_jatuh_tempo">Tanggal Jatuh Tempo</label>
-              <input type="date" name="tgl_jatuh_tempo" class="form-control" value="<?= $rowpembelian['tgl_jatuh_tempo'] ?>">
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label for="total">Total Pembelian</label>
-              <input type="number" name="total" class="form-control" value="<?= $total_pembelian ?>" readonly>
+              <label for="total">Total Penjualan</label>
+              <input type="number" name="total" class="form-control" value="<?= $total_penjualan ?>" readonly>
             </div>
           </div>
         </div>
-        <a href="?page=pembelianread" class="btn btn-danger btn-sm float-right mt-2">
+        <a href="?page=penjualanread" class="btn btn-danger btn-sm float-right mt-2">
           <i class="fa fa-arrow-left"></i> Kembali
         </a>
         <button type="submit" name="button_edit" class="btn btn-success btn-sm float-right mr-1 mt-2">
@@ -194,37 +169,38 @@ include_once "../partials/scriptdatatables.php";
     html += '<div class="form-group">';
     html += '<label for="id_obat[]">Nama Obat</label>'
     html += '<select name="id_obat[]" class="form-control" required>'
-    html +='<option value=""></option>'
-    html +='<?php $stmt_obat->execute(); while ($rowobat = $stmt_obat->fetch(PDO::FETCH_ASSOC)) { ?>';
-    html +='<option value=<?= $rowobat['id_obat'] ?>><?= strtoupper($rowobat['nama_obat']) ?></option>';
-    html +='<?php };?>';
-    html +='</select>';
-    html +='</div>';
-    html +='</div>';
-    html +='<div class="col-md">';
-    html +='<div class="form-group">';
-    html +='<label for="jumlah_obat[]">Jumlah</label>';
-    html +='<input type="number" name="jumlah_obat[]" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah_obat'] : '' ?>" style="text-transform: uppercase;" required>';
-    html +='</div>';
-    html +='</div>';
-    html +='<div class="col-md">';
-    html +='<div class="form-group">';
-    html +='<label for="harga[]">Harga</label>';
-    html +='<input type="number" name="harga[]" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah'] : '' ?>" style="text-transform: uppercase;" required readonly>';
-    html +='</div>';
-    html +='</div>';
-    html +='<div class="col-md">';
-    html +='<div class="form-group">';
-    html +='<label for="subtotal">Total</label>';
-    html +='<div class="input-group">';
-    html +='<input type="number" name="subtotal" class="form-control" value="0" style="text-transform: uppercase;" readonly>';
-    html +='<div class="input-group-append ml-3">';
-    html +='<button type="button" class="btn btn-sm btn-danger form-control" name="hapus_penjualan"><i class="fa fa-times"></i></button>';
-    html +='</div>';
-    html +='</div>';
-    html +='</div>';
-    html +='</div>';
-    html +='</div>';
+    html += '<option value=""></option>'
+    html += '<?php $stmt_obat->execute();
+              while ($rowobat = $stmt_obat->fetch(PDO::FETCH_ASSOC)) { ?>';
+    html += '<option value=<?= $rowobat['id_obat'] ?>><?= strtoupper($rowobat['nama_obat']) ?></option>';
+    html += '<?php }; ?>';
+    html += '</select>';
+    html += '</div>';
+    html += '</div>';
+    html += '<div class="col-md">';
+    html += '<div class="form-group">';
+    html += '<label for="jumlah_obat[]">Jumlah</label>';
+    html += '<input type="number" name="jumlah_obat[]" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah_obat'] : '' ?>" style="text-transform: uppercase;" required>';
+    html += '</div>';
+    html += '</div>';
+    html += '<div class="col-md">';
+    html += '<div class="form-group">';
+    html += '<label for="harga[]">Harga</label>';
+    html += '<input type="number" name="harga[]" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah'] : '' ?>" style="text-transform: uppercase;" required readonly>';
+    html += '</div>';
+    html += '</div>';
+    html += '<div class="col-md">';
+    html += '<div class="form-group">';
+    html += '<label for="subtotal">Total</label>';
+    html += '<div class="input-group">';
+    html += '<input type="number" name="subtotal" class="form-control" value="0" style="text-transform: uppercase;" readonly>';
+    html += '<div class="input-group-append ml-3">';
+    html += '<button type="button" class="btn btn-sm btn-danger form-control" name="hapus_penjualan"><i class="fa fa-times"></i></button>';
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
     $('#dinamis').append(html);
   });
 

@@ -113,7 +113,7 @@ if (isset($_SESSION['hasil'])) {
               <td><?= 'Rp. ' . number_format($row['harga_jual'], 0, ',', '.') ?></td>
               <td><?= 'Rp. ' . number_format($row['harga_jual']*$row['jumlah_obat'], 0, ',', '.') ?></td>
               <td>
-                <a href="?page=penjulandetail&id=<?= $row['no_penjualan']; ?>" class="btn btn-success btn-sm mr-1">
+                <a href="?page=penjualandetail&id=<?= $row['no_penjualan']; ?>" class="btn btn-success btn-sm mr-1">
                   <i class="fa fa-eye"></i> Lihat
                 </a>
                 <a href="?page=penjualanupdate&id=<?= $row['no_penjualan']; ?>" class="btn btn-primary btn-sm mr-1">
