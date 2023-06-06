@@ -138,6 +138,18 @@ if (isset($_GET['page'])) {
       file_exists('pages/pelayanan/pelayanandetail.php') ? include 'pages/pelayanan/pelayanandetail.php' : include '../pages/404.php';
       $title = 'Pelayanan';
       break;
+    case 'stokread':
+      file_exists('pages/stok/stokread.php') ? include 'pages/stok/stokread.php' : include '../pages/404.php';
+      $title = 'Stok';
+      break;
+    case 'obatread':
+      file_exists('pages/obat/obatread.php') ? include 'pages/obat/obatread.php' : include '../pages/404.php';
+      $title = 'Obat';
+      break;
+    case 'obatdetail':
+      file_exists('pages/obat/obatdetail.php') ? include 'pages/obat/obatdetail.php' : include '../pages/404.php';
+      $title = 'Obat';
+      break;
 
     case 'armadaread':
       file_exists('pages/armada/armadaread.php') ? include 'pages/armada/armadaread.php' : include '../pages/404.php';

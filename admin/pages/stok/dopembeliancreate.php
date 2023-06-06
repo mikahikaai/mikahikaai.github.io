@@ -17,14 +17,8 @@ for ($i = 0; $i < $jumlah_data; $i++) {
   $stmt_insert->bindParam(8, $_POST['harga'][$i]);
   $stmt_insert->bindParam(9, $_POST['jenis_pembelian']);
   $stmt_insert->execute();
-  //   $stmt_insert->debugDumpParams();
-  //   die();
-
-  $updatesql = "UPDATE obat SET stok_obat = stok_obat + ? WHERE id_obat =?";
-  $stmt_update = $db->prepare($updatesql);
-  $stmt_update->bindParam(1, $_POST['jumlah'][$i]);
-  $stmt_update->bindParam(2, $_POST['id_obat'][$i]);
-  $stmt_update->execute();
+//   $stmt_insert->debugDumpParams();
+//   die();
 }
 
 echo '<meta http-equiv="refresh" content="0;url=?page=pembelianread"/>';

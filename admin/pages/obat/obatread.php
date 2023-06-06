@@ -84,7 +84,7 @@ if (isset($_SESSION['hasil'])) {
             <th>Minimal Stok</th>
             <th>Stok Obat</th>
             <th>Khasiat</th>
-            <th>Keterangan</th>
+            <th>Efek Samping</th>
             <th style="display: flex;">Opsi</th>
           </tr>
         </thead>
@@ -111,7 +111,7 @@ if (isset($_SESSION['hasil'])) {
               <td><?= $row['minimal_stok'] ?></td>
               <td><?= $row['stok_obat'] ?></td>
               <td><?= $row['khasiat'] ?></td>
-              <td><?= $row['ket'] ?></td>
+              <td><?= $row['efek_samping'] ?></td>
               <td>
                 <a href="?page=obatdetail&id=<?= $row['id_obat']; ?>" class="btn btn-success btn-sm mr-1">
                   <i class="fa fa-eye"></i> Lihat

@@ -6,7 +6,7 @@ $selectpelanggansql = "SELECT * FROM data_pelanggan";
 $stmt_pelanggan = $db->prepare($selectpelanggansql);
 $stmt_pelanggan->execute();
 
-$selectobatsql = "SELECT * FROM obat";
+$selectobatsql = "SELECT * FROM obat WHERE stok_obat > 0 ORDER BY nama_obat ASC";
 $stmt_obat = $db->prepare($selectobatsql);
 $stmt_obat->execute();
 
@@ -92,7 +92,7 @@ $stmt_obat->execute();
                 <div class="col-md">
                   <div class="form-group">
                     <label for="jumlah_obat[]">Jumlah</label>
-                    <input type="number" name="jumlah_obat[]" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah_obat'] : '' ?>" style="text-transform: uppercase;" required>
+                    <input type="number" name="jumlah_obat[]" class="form-control" min="0" value="<?= isset($_POST['button_create']) ? $_POST['jumlah_obat'] : '' ?>" style="text-transform: uppercase;" required>
                   </div>
                 </div>
                 <div class="col-md">
@@ -232,7 +232,12 @@ include_once "../partials/scriptdatatables.php";
       success: function(data) {
         // console.log(data);
         $(e.target).parents('.row:first').find("input[name='harga[]']").val(data[0]);
+        $(e.target).parents('.row:first').find("input[name='jumlah_obat[]']").attr('max', data[1]);
       }
     });
   });
+
+  $(document).on('keypress', 'input[name="jumlah_obat[]"]', function(e){
+    return false;
+  })
 </script>

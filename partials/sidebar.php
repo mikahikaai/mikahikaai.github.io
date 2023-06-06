@@ -65,6 +65,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item" id="pembelian">
+            <a href="?page=stokread" class="nav-link" id="link_pembelian">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Stok Barang
+              </p>
+            </a>
+          </li>
           <li class="nav-item" id='master_data'>
             <a href="#" class="nav-link" id='link_master_data'>
               <i class="fas fa-th nav-icon"></i>
@@ -105,6 +113,30 @@
                 Penjualan
               </p>
             </a>
+          </li>
+           <li class="nav-item" id="penjualan">
+            <a href="?page=stokread" class="nav-link" id="link_penjualan">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Stok Barang
+              </p>
+            </a>
+          </li>
+          <li class="nav-item" id='master_data'>
+            <a href="#" class="nav-link" id='link_master_data'>
+              <i class="fas fa-th nav-icon"></i>
+              <p>
+                Master Data
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="?page=obatread" class="nav-link" id='obat'><i class="far fa-circle nav-icon"></i>
+                  <p>Obat</p>
+                </a>
+              </li>
+            </ul>
           </li>
         <?php } else if ($_SESSION['level'] == "SPVDISTRIBUSI") {
         ?>

@@ -7,15 +7,15 @@ $sql_no_penjualan_lama = "SELECT * FROM penjualan WHERE MONTH(tgl_penjualan) = M
 $stmt_no_penjualan_lama = $db->prepare($sql_no_penjualan_lama);
 $stmt_no_penjualan_lama->execute();
 $row_no_penjualan_lama = $stmt_no_penjualan_lama->fetch(PDO::FETCH_ASSOC);
-if ($stmt_no_penjualan_lama->rowCount() == 0){
+if ($stmt_no_penjualan_lama->rowCount() == 0) {
   $no_penjualan_lama = 1;
 } else {
   $no_penjualan_lama = $row_no_penjualan_lama['no_penjualan'];
 }
 
-$no_penjualan_baru = (int) substr($no_penjualan_lama,-4);
+$no_penjualan_baru = (int) substr($no_penjualan_lama, -4);
 
-$format_no_penjualan_baru = "PJ/" . substr(date('Y'),-2) . "/" . date('m/') .  str_pad($no_penjualan_baru + 1, 4, "0", STR_PAD_LEFT);
+$format_no_penjualan_baru = "PJ/" . substr(date('Y'), -2) . "/" . date('m/') .  str_pad($no_penjualan_baru + 1, 4, "0", STR_PAD_LEFT);
 
 // var_dump($format_no_penjualan_baru);
 // die();
@@ -31,8 +31,14 @@ for ($i = 0; $i < $jumlah_data; $i++) {
   $stmt_insert->bindParam(4, $_POST['tgl_penjualan']);
   $stmt_insert->bindParam(5, $_POST['jumlah_obat'][$i]);
   $stmt_insert->execute();
-//   $stmt_insert->debugDumpParams();
-//   die();
+  //   $stmt_insert->debugDumpParams();
+  //   die();
+
+  $updatesql = "UPDATE obat SET stok_obat = stok_obat - ? WHERE id_obat = ?";
+  $stmt_update = $db->prepare($updatesql);
+  $stmt_update->bindParam(1, $_POST['jumlah_obat'][$i]);
+  $stmt_update->bindParam(2, $_POST['id_obat'][$i]);
+  $stmt_update->execute();
 }
 
 echo '<meta http-equiv="refresh" content="0;url=?page=penjualanread"/>';
