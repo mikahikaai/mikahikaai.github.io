@@ -35,7 +35,7 @@ $rowpenjualan = $stmt_penjualan->fetch(PDO::FETCH_ASSOC);
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="?page=home">Home</a></li>
           <li class="breadcrumb-item"><a href="?page=penjualanread">Penjualan</a></li>
-          <li class="breadcrumb-item">Tambah Penjualan</li>
+          <li class="breadcrumb-item">Detail Penjualan</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
