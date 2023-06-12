@@ -48,12 +48,12 @@ if (isset($_SESSION['hasil'])) {
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0">Obat</h1>
+        <h1 class="m-0">Penjualan</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="?page=home">Home</a></li>
-          <li class="breadcrumb-item active">Obat</li>
+          <li class="breadcrumb-item active">Penjualan</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -65,12 +65,12 @@ if (isset($_SESSION['hasil'])) {
 <div class="content">
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Data Obat</h3>
-      <a href="report/reportrekapobat.php" target="_blank" class="btn btn-warning btn-sm float-right">
+      <h3 class="card-title">Data Penjualan</h3>
+      <a href="report/reportrekappenjualan.php" target="_blank" class="btn btn-warning btn-sm float-right">
         <i class="fa fa-file-pdf"></i> Export PDF
       </a>
-      <a href="?page=obatcreate" class="btn btn-success btn-sm mr-2 float-right">
-        <i class="fa fa-plus-circle"></i> Tambah Data
+      <a href="?page=penjualancreate" class="btn btn-success btn-sm mr-2 float-right">
+        <i class="fa fa-plus-circle"></i> Tambah Data Penjualan
       </a>
     </div>
     <div class="card-body">
@@ -78,13 +78,13 @@ if (isset($_SESSION['hasil'])) {
         <thead>
           <tr>
             <th>No.</th>
+            <th>No Penjualan</th>
+            <th>Tanggal Penjualan</th>
+            <th>Nama Pembeli</th>
             <th>Nama Obat</th>
-            <th>Jenis Obat</th>
-            <th>Harga Jual</th>
-            <th>Minimal Stok</th>
-            <th>Stok Obat</th>
-            <th>Khasiat</th>
-            <th>Efek Samping</th>
+            <th>Jumlah</th>
+            <th>Harga</th>
+            <th>Total</th>
             <th style="display: flex;">Opsi</th>
           </tr>
         </thead>
@@ -93,7 +93,7 @@ if (isset($_SESSION['hasil'])) {
           $database = new Database;
           $db = $database->getConnection();
 
-          $selectsql = 'SELECT * FROM obat order by nama_obat asc';
+          $selectsql = 'SELECT * FROM penjualan pj inner join data_pelanggan pg on pj.id_pelanggan = pg.id_pelanggan inner join obat o on pj.id_obat = o.id_obat ORDER BY no_penjualan ASC';
           $stmt = $db->prepare($selectsql);
           $stmt->execute();
 
@@ -105,21 +105,21 @@ if (isset($_SESSION['hasil'])) {
           ?>
             <tr>
               <td><?= $no++ ?></td>
+              <td style="text-transform: uppercase;"><?= $row['no_penjualan'] ?></td>
+              <td><?= $row['tgl_penjualan'] ?></td>
+              <td style="text-transform: uppercase;"><?= $row['nama'] ?></td>
               <td style="text-transform: uppercase;"><?= $row['nama_obat'] ?></td>
-              <td><?= $row['jenis_obat'] ?></td>
+              <td><?= $row['jumlah_obat'] ?></td>
               <td><?= 'Rp. ' . number_format($row['harga_jual'], 0, ',', '.') ?></td>
-              <td><?= $row['minimal_stok'] ?></td>
-              <td><?= $row['stok_obat'] ?></td>
-              <td style="text-transform: uppercase;"><?= $row['khasiat'] ?></td>
-              <td style="text-transform: uppercase;"><?= $row['efek_samping'] ?></td>
+              <td><?= 'Rp. ' . number_format($row['harga_jual']*$row['jumlah_obat'], 0, ',', '.') ?></td>
               <td>
-                <a href="?page=obatdetail&id=<?= $row['id_obat']; ?>" class="btn btn-success btn-sm mr-1">
+                <a href="?page=penjualandetail&id=<?= $row['no_penjualan']; ?>" class="btn btn-success btn-sm mr-1">
                   <i class="fa fa-eye"></i> Lihat
                 </a>
-                <a href="?page=obatupdate&id=<?= $row['id_obat']; ?>" class="btn btn-primary btn-sm mr-1">
+                <a href="?page=penjualanupdate&id=<?= $row['no_penjualan']; ?>" class="btn btn-primary btn-sm mr-1">
                   <i class="fa fa-edit"></i> Ubah
                 </a>
-                <a href="?page=obatdelete&id=<?= $row['id_obat']; ?>" class="btn btn-danger btn-sm mr-1" id='deleteobat'>
+                <a href="?page=penjualandelete&id=<?= $row['no_penjualan']; ?>" class="btn btn-danger btn-sm mr-1" id='deletepenjualan'>
                   <i class="fa fa-trash"></i> Hapus
                 </a>
               </td>
@@ -136,13 +136,13 @@ include_once "../partials/scriptdatatables.php";
 ?>
 <script>
   $(function() {
-    $('a#deleteobat').click(function(e) {
+    $('a#deletepenjualan').click(function(e) {
       e.preventDefault();
       var urlToRedirect = e.currentTarget.getAttribute('href');
       //use currentTarget because the click may be on the nested i tag and not a tag causing the href to be empty
       Swal.fire({
         title: 'Apakah anda yakin?',
-        text: "Data yang dihapus tidak dapat kembali!",
+        text: "Data dengan nomor penjualan yang sama akan ikut terhapus!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
