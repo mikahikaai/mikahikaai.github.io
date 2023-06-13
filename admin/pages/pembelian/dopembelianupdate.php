@@ -1,7 +1,5 @@
 <?php
 
-include "updateStok.php";
-
 $database = new Database;
 $db = $database->getConnection();
 

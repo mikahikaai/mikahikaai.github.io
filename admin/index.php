@@ -27,6 +27,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <?php
 include "../database/database.php";
+include "../partials/fungsi.php";
 $title = '';
 include "../partials/head.php";
 include_once "../partials/scripts.php";

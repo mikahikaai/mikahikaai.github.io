@@ -13,7 +13,7 @@ function updateStok()
   while ($rowstokobat = $stmtstokobat->fetch(PDO::FETCH_ASSOC)) {
 
     $jumlah_beli_obat = 0;
-    $selectpembelian = "SELECT SUM(jumlah) FROM pembelian WHERE id_obat = ?";
+    $selectpembelian = "SELECT SUM(jumlah) as jumlah FROM pembelian WHERE id_obat = ?";
     $stmt_pembelian = $db->prepare($selectpembelian);
     $stmt_pembelian->bindParam(1, $rowstokobat['id_obat']);
     $stmt_pembelian->execute();
@@ -22,7 +22,7 @@ function updateStok()
     $jumlah_beli_obat = $row_beli_obat['jumlah'];
 
     $jumlah_jual_obat = 0;
-    $selectpenjualan = "SELECT SUM(jumlah_obat) FROM penjualan WHERE id_obat = ?";
+    $selectpenjualan = "SELECT SUM(jumlah_obat) as jumlah_obat FROM penjualan WHERE id_obat = ?";
     $stmt_penjualan = $db->prepare($selectpenjualan);
     $stmt_penjualan->bindParam(1, $rowstokobat['id_obat']);
     $stmt_penjualan->execute();
