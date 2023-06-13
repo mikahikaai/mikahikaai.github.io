@@ -1,4 +1,7 @@
 <?php
+
+include "updateStok.php";
+
 $database = new Database;
 $db = $database->getConnection();
 
@@ -32,6 +35,7 @@ for ($i = 0; $i < $jumlah_data; $i++) {
     $_SESSION['pesan'] = "Gagal Mengubah Data";
   }
 
+  updateStok();
   // $stmt_insert->debugDumpParams();
   // die();
 
