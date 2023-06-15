@@ -50,7 +50,7 @@ $rowpenjualan = $stmt_penjualan->fetch(PDO::FETCH_ASSOC);
       <h3 class="card-title">Ubah Data Penjualan</h3>
     </div>
     <div class="card-body">
-      <form action="?page=dopenjualanupdate&&id=<?= $_GET['id'] ?>" method="post">
+      <form action="?page=dopenjualanupdate&id=<?= $_GET['id'] ?>" method="post">
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
