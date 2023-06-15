@@ -3,19 +3,22 @@ $database = new Database;
 $db = $database->getConnection();
 
 $no_penjualan_lama = '';
-$sql_no_penjualan_lama = "SELECT * FROM penjualan WHERE MONTH(tgl_penjualan) = MONTH(NOW()) AND YEAR(tgl_penjualan) = YEAR(NOW()) ORDER BY no_penjualan DESC LIMIT 1";
+$tanggal = $_POST['tgl_penjualan'];
+$sql_no_penjualan_lama = "SELECT * FROM penjualan WHERE MONTH(tgl_penjualan) = MONTH(?) AND YEAR(tgl_penjualan) = YEAR(?) ORDER BY no_penjualan DESC LIMIT 1";
 $stmt_no_penjualan_lama = $db->prepare($sql_no_penjualan_lama);
+$stmt_no_penjualan_lama->bindParam(1, $tanggal);
+$stmt_no_penjualan_lama->bindParam(2, $tanggal);
 $stmt_no_penjualan_lama->execute();
 $row_no_penjualan_lama = $stmt_no_penjualan_lama->fetch(PDO::FETCH_ASSOC);
 if ($stmt_no_penjualan_lama->rowCount() == 0) {
-  $no_penjualan_lama = 1;
+  $no_penjualan_lama = 0;
 } else {
   $no_penjualan_lama = $row_no_penjualan_lama['no_penjualan'];
 }
 
 $no_penjualan_baru = (int) substr($no_penjualan_lama, -4);
 
-$format_no_penjualan_baru = "PJ/" . substr(date('Y'), -2) . "/" . date('m/') .  str_pad($no_penjualan_baru + 1, 4, "0", STR_PAD_LEFT);
+$format_no_penjualan_baru = "PJ/" . substr(date_create($_POST['tgl_penjualan'])->format('Y'), -2) . "/" . date_create($_POST['tgl_penjualan'])->format('m') . "/" .  str_pad($no_penjualan_baru + 1, 4, "0", STR_PAD_LEFT);
 
 // var_dump($format_no_penjualan_baru);
 // die();
@@ -40,6 +43,8 @@ for ($i = 0; $i < $jumlah_data; $i++) {
   $stmt_update->bindParam(2, $_POST['id_obat'][$i]);
   $stmt_update->execute();
 }
+
+updateStok();
 
 echo '<meta http-equiv="refresh" content="0;url=?page=penjualanread"/>';
 exit;

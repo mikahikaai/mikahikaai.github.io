@@ -92,7 +92,7 @@ $stmt_obat->execute();
                 <div class="col-md">
                   <div class="form-group">
                     <label for="jumlah_obat[]">Jumlah</label>
-                    <input type="number" name="jumlah_obat[]" class="form-control" min="0" value="<?= isset($_POST['button_create']) ? $_POST['jumlah_obat'] : '' ?>" style="text-transform: uppercase;" required>
+                    <input type="number" name="jumlah_obat[]" class="form-control" min="1" value="<?= isset($_POST['button_create']) ? $_POST['jumlah_obat'] : '' ?>" style="text-transform: uppercase;" required>
                   </div>
                 </div>
                 <div class="col-md">
@@ -161,7 +161,7 @@ include_once "../partials/scriptdatatables.php";
     html +='<div class="col-md">';
     html +='<div class="form-group">';
     html +='<label for="jumlah_obat[]">Jumlah</label>';
-    html +='<input type="number" name="jumlah_obat[]" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah_obat'] : '' ?>" style="text-transform: uppercase;" required>';
+    html +='<input type="number" name="jumlah_obat[]" class="form-control" min="1" value="<?= isset($_POST['button_create']) ? $_POST['jumlah_obat'] : '' ?>" style="text-transform: uppercase;" required>';
     html +='</div>';
     html +='</div>';
     html +='<div class="col-md">';
