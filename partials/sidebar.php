@@ -158,12 +158,12 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="?page=pembelianread" class="nav-link" id='obat'><i class="far fa-circle nav-icon"></i>
+                <a href="?page=rangerekappembelian" class="nav-link" id='obat'><i class="far fa-circle nav-icon"></i>
                   <p>Rekap Pembelian</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="?page=penjualanread" class="nav-link" id='suplier'><i class="far fa-circle nav-icon"></i>
+                <a href="?page=rangerekappenjualan" class="nav-link" id='suplier'><i class="far fa-circle nav-icon"></i>
                   <p>Rekap Penjualan</p>
                 </a>
               </li>

@@ -107,8 +107,8 @@ if (isset($_SESSION['hasil'])) {
               <td><?= 'Rp. ' . number_format($row['harga_jual'], 0, ',', '.') ?></td>
               <td><?= $row['minimal_stok'] ?></td>
               <td><?= $row['stok_obat'] ?></td>
-              <td><?= $row['khasiat'] ?></td>
-              <td><?= $row['efek_samping'] ?></td>
+              <td style="text-transform: uppercase;"><?= $row['khasiat'] ?></td>
+              <td style="text-transform: uppercase;"><?= $row['efek_samping'] ?></td>
               <td>
                 <a href="?page=obatdetail&id=<?= $row['id_obat']; ?>" class="btn btn-success btn-sm mr-1">
                   <i class="fa fa-eye"></i> Lihat

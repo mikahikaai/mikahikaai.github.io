@@ -69,9 +69,6 @@ if (isset($_SESSION['hasil'])) {
       <a href="report/reportrekappembelian.php" target="_blank" class="btn btn-warning btn-sm float-right">
         <i class="fa fa-file-pdf"></i> Export PDF
       </a>
-      <a href="?page=pembeliancreate" class="btn btn-success btn-sm mr-2 float-right">
-        <i class="fa fa-plus-circle"></i> Tambah Data
-      </a>
     </div>
     <div class="card-body">
       <table id="mytable" class="table table-bordered" style="white-space: nowrap;" width="100%">
@@ -113,7 +110,7 @@ if (isset($_SESSION['hasil'])) {
               <td style="text-transform: uppercase;"><?= $row['nama_obat'] ?></td>
               <td><?= $row['jumlah'] ?></td>
               <td><?= 'Rp. ' . number_format($row['harga'], 0, ',', '.') ?></td>
-              <td><?= 'Rp. ' . number_format($row['harga']*$row['jumlah'], 0, ',', '.') ?></td>
+              <td><?= 'Rp. ' . number_format($row['harga'] * $row['jumlah'], 0, ',', '.') ?></td>
               <td><?= $row['ex_obat'] ?></td>
               <td><?= $row['nama_suplier'] ?></td>
               <td><?= $row['tgl_jatuh_tempo'] ?></td>
@@ -121,12 +118,6 @@ if (isset($_SESSION['hasil'])) {
               <td>
                 <a href="?page=pembeliandetail&id=<?= $row['no_faktur']; ?>" class="btn btn-success btn-sm mr-1">
                   <i class="fa fa-eye"></i> Lihat
-                </a>
-                <a href="?page=pembelianupdate&id=<?= $row['no_faktur']; ?>" class="btn btn-primary btn-sm mr-1">
-                  <i class="fa fa-edit"></i> Ubah
-                </a>
-                <a href="?page=pembeliandelete&id=<?= $row['no_faktur']; ?>" class="btn btn-danger btn-sm mr-1" id='deletepembelian'>
-                  <i class="fa fa-trash"></i> Hapus
                 </a>
               </td>
             </tr>

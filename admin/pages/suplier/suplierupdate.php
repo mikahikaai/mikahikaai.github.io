@@ -82,7 +82,7 @@ if (isset($_GET['id'])) {
         <div class="form-group">
           <label for="alamat">Alamat</label>
           <br>
-          <textarea name="alamat" rows="4" required><?= $row['alamat'] ?></textarea>
+          <textarea style="text-transform: uppercase;" name="alamat" rows="4" required><?= $row['alamat'] ?></textarea>
         </div>
         <a href="?page=suplierread" class="btn btn-danger btn-sm float-right mt-2">
           <i class="fa fa-arrow-left"></i> Kembali

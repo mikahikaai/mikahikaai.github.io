@@ -102,7 +102,7 @@ if (isset($_SESSION['hasil'])) {
             <tr>
               <td><?= $no++ ?></td>
               <td style="text-transform: uppercase;"><?= $row['nama_suplier'] ?></td>
-              <td><?= $row['alamat'] ?></td>
+              <td style="text-transform: uppercase;"><?= $row['alamat'] ?></td>
               <td><?= $row['no_telp'] ?></td>
               <td>
                 <a href="?page=suplierdetail&id=<?= $row['id_suplier']; ?>" class="btn btn-success btn-sm mr-1">

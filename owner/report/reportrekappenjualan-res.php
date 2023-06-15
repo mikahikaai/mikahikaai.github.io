@@ -22,7 +22,7 @@ $tgl_rekap_akhir = date_format($_SESSION['tgl_rekap_akhir'], "Y-m-d H:i:s");
 // var_dump($tgl_rekap_akhir);
 // die();
 
-$selectSql = "SELECT * FROM pembelian p inner join obat o on p.id_obat = o.id_obat inner join suplier s on p.id_suplier = s.id_suplier WHERE (tgl_pembelian BETWEEN ? AND ?) ORDER BY tgl_pembelian ASC";
+$selectSql = "SELECT * FROM penjualan pj inner join data_pelanggan pg on pj.id_pelanggan = pg.id_pelanggan inner join obat o on pj.id_obat = o.id_obat WHERE (tgl_penjualan BETWEEN ? AND ?) ORDER BY tgl_penjualan ASC";
 $stmt = $db->prepare($selectSql);
 $stmt->bindParam(1, $tgl_rekap_awal);
 $stmt->bindParam(2, $tgl_rekap_akhir);
@@ -82,7 +82,7 @@ $stmt->execute();
 
 <table style="width: 100%; margin-bottom: 10px;">
   <tr>
-    <td align="center" style="font-weight: bold; padding-bottom: 20px; font-size: x-large;"><u>DATA REKAP PEMBELIAN</u></td>
+    <td align="center" style="font-weight: bold; padding-bottom: 20px; font-size: x-large;"><u>DATA REKAP PENJUALAN</u></td>
   </tr>
 </table>
 
@@ -91,45 +91,40 @@ $stmt->execute();
   <thead>
     <tr>
       <th>No.</th>
-      <th>No Faktur</th>
-      <th>Tanggal Faktur</th>
+      <th>No Penjualan</th>
+      <th>Tanggal Penjualan</th>
+      <th>Nama Pembeli</th>
       <th>Nama Obat</th>
-      <th>Qty</th>
-      <th>Harga Pembelian</th>
+      <th>Jumlah</th>
+      <th>Harga</th>
       <th>Total</th>
-      <th>Expired Obat</th>
-      <th>Nama Suplier</th>
-      <th>Tanggal Jatuh Tempo</th>
-      <th>Jenis Pembelian</th>
+      <!-- <th style="display: flex;">Opsi</th> -->
     </tr>
   </thead>
   <tbody>
     <?php
 
     $no = 1;
-    $total_pembelian = 0;
+    $total_penjualan = 0;
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      $total_pembelian += $row['jumlah'] * $row['harga'];
+      $total_penjualan += $row['jumlah_obat'] * $row['harga_jual'];
     ?>
       <tr>
         <td><?= $no++ ?></td>
-        <td style="text-transform: uppercase;"><?= $row['no_faktur'] ?></td>
-        <td><?= tanggal_indo($row['tgl_pembelian']) ?></td>
+        <td style="text-transform: uppercase;"><?= $row['no_penjualan'] ?></td>
+        <td><?= $row['tgl_penjualan'] ?></td>
+        <td style="text-transform: uppercase;"><?= $row['nama'] ?></td>
         <td style="text-transform: uppercase;"><?= $row['nama_obat'] ?></td>
-        <td><?= number_format($row['jumlah'], 0, ",", ".") ?></td>
-        <td><?= "Rp. " . number_format($row['harga'], 0, ",", ".") ?></td>
-        <td><?= "Rp. " . number_format($row['jumlah'] * $row['harga'], 0, ",", ".") ?></td>
-        <td><?= tanggal_indo($row['ex_obat']) ?></td>
-        <td><?= $row['nama_suplier'] ?></td>
-        <td><?= tanggal_indo($row['tgl_jatuh_tempo']) ?></td>
-        <td style="text-transform: uppercase;"><?= $row['jenis_pembelian'] ?></td>
+        <td><?= $row['jumlah_obat'] ?></td>
+        <td><?= 'Rp. ' . number_format($row['harga_jual'], 0, ',', '.') ?></td>
+        <td><?= 'Rp. ' . number_format($row['harga_jual'] * $row['jumlah_obat'], 0, ',', '.') ?></td>
       </tr>
     <?php } ?>
   </tbody>
   <tfoot>
     <tr style="background-color: cornsilk;">
-      <td style="font-weight: bold;" colspan="6" align="center">TOTAL PEMBELIAN</td>
-      <td style="font-weight: bold;" colspan="5" align="center"><?= "Rp. " . number_format($total_pembelian, 0, ",", ".") ?></td>
+      <td style="font-weight: bolder;" colspan="7" align="center">TOTAL PENJUALAN</td>
+      <td style="font-weight: bolder;" align="center"><?= "Rp. " . number_format($total_penjualan, 0, ",", ".") ?></td>
     </tr>
   </tfoot>
 </table>

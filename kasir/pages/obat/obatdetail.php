@@ -89,15 +89,21 @@ if (isset($_GET['id'])) {
           </div>
         </div>
       </div>
-      <div class="form-group">
-        <label for="khasiat">Khasiat</label>
-        <br>
-        <textarea name="khasiat" rows="4" readonly><?= $row['khasiat'] ?></textarea>
-      </div>
-      <div class="form-group">
-        <label for="ket">Keterangan</label>
-        <input type="text" name="ket" class="form-control" value="<?= $row['ket'] ?>" style="text-transform: uppercase;" readonly>
-      </div>
+      <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="khasiat">Khasiat</label>
+              <br>
+              <textarea style="text-transform: uppercase;" name="khasiat" rows="4" disabled><?= $row['khasiat'] ?></textarea>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="efek_samping">Efek Samping</label>
+              <textarea style="text-transform: uppercase;" name="efek_samping" rows="4" disabled><?= $row['efek_samping'] ?></textarea>
+            </div>
+          </div>
+        </div>
       <a href="?page=obatread" class="btn btn-danger btn-sm float-right mt-2">
         <i class="fa fa-arrow-left"></i> Kembali
       </a>
