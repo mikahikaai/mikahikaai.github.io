@@ -206,66 +206,31 @@ include_once "../partials/scripts.php";
     var title = '<?= $title; ?>';
     if (title == "Home") {
       $("a#home").addClass("active");
-    } else if (title == "Armada") {
-      $("a#armada").addClass("active");
+    } else if (title == "Pelayanan") {
+      $("a#pelayanan").addClass("active");
+      $("a#link_pelayanan").addClass("active");
+    } else if (title == "Pembelian") {
+      $("a#pembelian").addClass("active");
+      $("a#link_pembelian").addClass("active");
+    } else if (title == "Stok") {
+      $("a#stok").addClass("active");
+      $("a#link_stok").addClass("active");
+    } else if (title == "Obat") {
+      $("a#obat").addClass("active");
       $("li#master_data").addClass("menu-open");
       $("a#link_master_data").addClass("active");
-    } else if (title == "Karyawan") {
-      $("a#karyawan").addClass("active");
+    } else if (title == "Suplier") {
+      $("a#suplier").addClass("active");
       $("li#master_data").addClass("menu-open");
       $("a#link_master_data").addClass("active");
-    } else if (title == "Distributor") {
-      $("a#distributor").addClass("active");
+    } else if (title == "Pelanggan") {
+      $("a#pelanggan").addClass("active");
       $("li#master_data").addClass("menu-open");
       $("a#link_master_data").addClass("active");
-    } else if (title == "Distribusi") {
-      $("a#distribusi").addClass("active");
-      $("li#master_distribusi").addClass("menu-open");
-      $("a#link_master_distribusi").addClass("active");
-    } else if (title == "Pengajuan Insentif") {
-      $("a#pengajuaninsentif").addClass("active");
-      $("li#pengajuaninsentif").addClass("menu-open");
-      $("a#link_pengajuaninsentif").addClass("active");
-    } else if (title == "Upah Belum Diajukan") {
-      $("a#upahbelumdiajukan").addClass("active");
-      $("li#pengajuaninsentif").addClass("menu-open");
-      $("a#link_pengajuaninsentif").addClass("active");
-    } else if (title == "Cetak Upah") {
-      $("a#cetakupah").addClass("active");
-      $("li#pengajuaninsentif").addClass("menu-open");
-      $("a#link_pengajuaninsentif").addClass("active");
-    } else if (title == "Cetak Insentif") {
-      $("a#cetakinsentif").addClass("active");
-      $("li#pengajuaninsentif").addClass("menu-open");
-      $("a#link_pengajuaninsentif").addClass("active");
-    } else if (title == "Rekap Pengajuan Insentif") {
-      $("a#rekappengajuaninsentif").addClass("active");
-      $("li#rekapitulasi").addClass("menu-open");
-      $("a#link_rekapitulasi").addClass("active");
-    } else if (title == "Rekap Pengajuan Upah") {
-      $("a#rekappengajuanupah").addClass("active");
-      $("li#rekapitulasi").addClass("menu-open");
-      $("a#link_rekapitulasi").addClass("active");
-    } else if (title == "Rekap Upah") {
-      $("a#rekapupah").addClass("active");
-      $("li#rekapitulasi").addClass("menu-open");
-      $("a#link_rekapitulasi").addClass("active");
-    } else if (title == "Rekap Insentif") {
-      $("a#rekapinsentif").addClass("active");
-      $("li#rekapitulasi").addClass("menu-open");
-      $("a#link_rekapitulasi").addClass("active");
-    } else if (title == "Rekap Gaji") {
-      $("a#rekapgaji").addClass("active");
-      $("li#rekapitulasi").addClass("menu-open");
-      $("a#link_rekapitulasi").addClass("active");
-    } else if (title == "Rekap Distribusi") {
-      $("a#rekapdistribusi").addClass("active");
-      $("li#rekapitulasi").addClass("menu-open");
-      $("a#link_rekapitulasi").addClass("active");
-    } else if (title == "Prestasi") {
-      $("a#prestasikaryawan").addClass("active");
-      $("li#master_distribusi").addClass("menu-open");
-      $("a#link_master_distribusi").addClass("active");
+    } else if (title == "Dokter") {
+      $("a#dokter").addClass("active");
+      $("li#master_data").addClass("menu-open");
+      $("a#link_master_data").addClass("active");
     }
 
 

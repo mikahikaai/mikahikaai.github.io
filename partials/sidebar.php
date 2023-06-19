@@ -65,8 +65,8 @@
               </p>
             </a>
           </li>
-          <li class="nav-item" id="pembelian">
-            <a href="?page=stokread" class="nav-link" id="link_pembelian">
+          <li class="nav-item" id="stok">
+            <a href="?page=stokread" class="nav-link" id="link_stok">
               <i class="nav-icon fas fa-box"></i>
               <p>
                 Stok Barang
@@ -114,8 +114,8 @@
               </p>
             </a>
           </li>
-           <li class="nav-item" id="penjualan">
-            <a href="?page=stokread" class="nav-link" id="link_penjualan">
+           <li class="nav-item" id="stok">
+            <a href="?page=stokread" class="nav-link" id="link_stok">
               <i class="nav-icon fas fa-box"></i>
               <p>
                 Stok Barang
@@ -140,8 +140,8 @@
           </li>
         <?php } else if ($_SESSION['level'] == "Owner") {
         ?>
-          <li class="nav-item" id="pembelian">
-            <a href="?page=stokread" class="nav-link" id="link_pembelian">
+          <li class="nav-item" id="stok">
+            <a href="?page=stokread" class="nav-link" id="link_stok">
               <i class="nav-icon fas fa-box"></i>
               <p>
                 Stok Barang
@@ -158,12 +158,12 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="?page=rangerekappembelian" class="nav-link" id='obat'><i class="far fa-circle nav-icon"></i>
+                <a href="?page=rangerekappembelian" class="nav-link" id='rekappembelian'><i class="far fa-circle nav-icon"></i>
                   <p>Rekap Pembelian</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="?page=rangerekappenjualan" class="nav-link" id='suplier'><i class="far fa-circle nav-icon"></i>
+                <a href="?page=rangerekappenjualan" class="nav-link" id='rekappenjualan'><i class="far fa-circle nav-icon"></i>
                   <p>Rekap Penjualan</p>
                 </a>
               </li>

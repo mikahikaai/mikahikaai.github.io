@@ -120,11 +120,11 @@ if (isset($_GET['page'])) {
       break;
     case 'rangerekappembelian':
       file_exists('pages/pembelian/rangerekappembelian.php') ? include 'pages/pembelian/rangerekappembelian.php' : include '../pages/404.php';
-      $title = 'Pembelian';
+      $title = 'Rekap Pembelian';
       break;
     case 'rekappembelian':
       file_exists('pages/pembelian/rekappembelian.php') ? include 'pages/pembelian/rekappembelian.php' : include '../pages/404.php';
-      $title = 'Pembelian';
+      $title = 'Rekap Pembelian';
       break;
     case 'stokread':
       file_exists('pages/stok/stokread.php') ? include 'pages/stok/stokread.php' : include '../pages/404.php';
@@ -172,11 +172,11 @@ if (isset($_GET['page'])) {
       break;
     case 'rangerekappenjualan':
       file_exists('pages/penjualan/rangerekappenjualan.php') ? include 'pages/penjualan/rangerekappenjualan.php' : include '../pages/404.php';
-      $title = 'Penjualan';
+      $title = 'Rekap Penjualan';
       break;
     case 'rekappenjualan':
       file_exists('pages/penjualan/rekappenjualan.php') ? include 'pages/penjualan/rekappenjualan.php' : include '../pages/404.php';
-      $title = 'Penjualan';
+      $title = 'Rekap Penjualan';
       break;
 
     case 'armadaread':

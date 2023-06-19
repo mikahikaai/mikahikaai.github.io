@@ -3,7 +3,7 @@ $database = new Database;
 $db = $database->getConnection();
 
 $id = $_SESSION['id'];
-$selectpw = "SELECT * FROM karyawan where id = ?";
+$selectpw = "SELECT * FROM data_pengguna where id = ?";
 $stmt = $db->prepare($selectpw);
 $stmt->bindParam(1, $id);
 $stmt->execute();
@@ -18,7 +18,7 @@ if (isset($_POST['button_edit'])) {
       Password baru dan konfirmasi password tidak sama
     </div>
   <?php
-  } else if (md5($_POST['old_password']) != $row['password']) {
+  } else if ($_POST['old_password'] != $row['password']) {
   ?>
     <div class="alert alert-danger alert-dismissable">
       <button class="close" type="button" data-dismiss="alert" aria-hidden="true">X</button>
@@ -27,10 +27,9 @@ if (isset($_POST['button_edit'])) {
     </div>
 <?php
   } else {
-    $updatepw = "UPDATE karyawan SET password = ? where id = ?";
+    $updatepw = "UPDATE data_pengguna SET password = ? where id = ?";
     $stmt = $db->prepare($updatepw);
-    $md5 = md5($_POST['password']);
-    $stmt->bindParam(1, $md5);
+    $stmt->bindParam(1, $_POST['password']);
     $stmt->bindParam(2, $id);
     if ($stmt->execute()) {
       $_SESSION['hasil_update_pw'] = true;
@@ -40,6 +39,7 @@ if (isset($_POST['button_edit'])) {
       $_SESSION['pesan'] = "Gagal Mengubah Data";
     }
     echo '<meta http-equiv="refresh" content="0;url=?page=home"/>';
+    exit;
   }
 }
 ?>
@@ -93,3 +93,7 @@ if (isset($_POST['button_edit'])) {
   </div>
 </div>
 <!-- /.content -->
+
+<?php
+include_once "../partials/scriptdatatables.php";
+?>
