@@ -103,14 +103,16 @@ $stmt_dokter->execute();
             <div class="form-group">
               <label for="diagnosa">Diagnosa</label>
               <br>
-              <textarea name="diagnosa" rows="4" disabled><?= $rowpelayanan['diagnosa'] ?></textarea>
+              <textarea name="diagnosa" rows="4" disabled style="text-transform: uppercase;"><?= $rowpelayanan['diagnosa'] ?></textarea>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
-        <div class="form-group">
-            <label for="ket">Keterangan</label>
-            <input type="text-transform: uppercase" name="ket" class="form-control" value="<?=$rowpelayanan['ket'] ?>" style="text-transform: uppercase;" disabled>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="ket">Keterangan</label>
+              <input type="text-transform: uppercase" name="ket" class="form-control" value="<?= $rowpelayanan['ket'] ?>" style="text-transform: uppercase;" disabled>
+            </div>
           </div>
         </div>
         <a href="?page=pelayananread" class="btn btn-danger btn-sm float-right mt-2">
