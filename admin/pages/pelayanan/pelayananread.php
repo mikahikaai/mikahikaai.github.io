@@ -117,6 +117,9 @@ if (isset($_SESSION['hasil'])) {
                 <a href="?page=pelayananupdate&id=<?= $row['id_pelayanan']; ?>" class="btn btn-primary btn-sm mr-1">
                   <i class="fa fa-edit"></i> Ubah
                 </a>
+                <a href="?page=pelayanancetak&id=<?= $row['id_pelayanan']; ?>" class="btn btn-warning btn-sm mr-1">
+                  <i class="fa fa-print"></i> Cetak
+                </a>
                 <a href="?page=pelayanandelete&id=<?= $row['id_pelayanan']; ?>" class="btn btn-danger btn-sm mr-1" id='deletepelayanan'>
                   <i class="fa fa-trash"></i> Hapus
                 </a>
