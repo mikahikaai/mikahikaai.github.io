@@ -96,136 +96,15 @@
               </li>
             </ul>
           </li>
-        <?php } else if ($_SESSION['level'] == "ADMINKEU") {
+        <?php } else if ($_SESSION['level'] == "Kasir") {
         ?>
-          <li class="nav-item" id="pengajuaninsentif">
-            <a href="#" class="nav-link" id="link_pengajuaninsentif">
-              <i class="nav-icon fas fa-money-bill"></i>
+           <li class="nav-item" id="penjualan">
+            <a href="?page=penjualanread" class="nav-link" id="link_penjualan">
+              <i class="nav-icon fas fa-dollar"></i>
               <p>
-                Penggajian
-                <i class="right fas fa-angle-left"></i>
+                Penjualan
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="?page=upahbelumdiajukan" class="nav-link" id="upahbelumdiajukan">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Upah Belum Pengajuan</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="?page=rangepengajuaninsentif" class="nav-link" id="pengajuaninsentif">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Pengajuan Insentif</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="?page=cetakupah" class="nav-link" id="cetakupah">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Cetak Pengajuan Upah</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="?page=cetakinsentif" class="nav-link" id="cetakinsentif">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Cetak Pengajuan Insentif</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item" id="rekapitulasi">
-            <a href="#" class="nav-link" id="link_rekapitulasi">
-              <i class="nav-icon fas fa-paperclip"></i>
-              <p>
-                Rekapitulasi
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="?page=rangerekappengajuanupah" class="nav-link" id="rekappengajuanupah">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Rekap Pengajuan Upah</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="?page=rangerekappengajuaninsentif" class="nav-link" id="rekappengajuaninsentif">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Rekap Pengajuan Insentif</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="?page=rangerekapupah" class="nav-link" id="rekapupah">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Rekap Upah</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="?page=rangerekapinsentif" class="nav-link" id="rekapinsentif">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Rekap Insentif</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="?page=rangerekapgaji" class="nav-link" id="rekapgaji">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Rekap Gaji</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="?page=rangerekapdistribusi" class="nav-link" id="rekapdistribusi">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Rekap Distribusi</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item" id='master_data'>
-            <a href="#" class="nav-link" id='link_master_data'>
-              <i class="fas fa-th nav-icon"></i>
-              <p>
-                Master Data
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="?page=armadaread" class="nav-link" id='armada'><i class="far fa-circle nav-icon"></i>
-                  <p>Armada</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="?page=karyawanread" class="nav-link" id='karyawan'><i class="far fa-circle nav-icon"></i>
-                  <p>Karyawan</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="?page=distributorread" class="nav-link" id="distributor"><i class="far fa-circle nav-icon"></i>
-                  <p>Distributor</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item" id='master_distribusi'>
-            <a href="#" class="nav-link" id='link_master_distribusi'>
-              <i class="fas fa-truck nav-icon"></i>
-              <p>
-                Master Distribusi
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="?page=distribusiread" class="nav-link" id="distribusi"><i class="far fa-circle nav-icon"></i>
-                  <p>Distribusi</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="?page=rangeprestasikaryawan" class="nav-link" id="prestasikaryawan"><i class="far fa-circle nav-icon"></i>
-                  <p>Prestasi Keberangkatan</p>
-                </a>
-              </li>
-            </ul>
           </li>
         <?php } else if ($_SESSION['level'] == "SPVDISTRIBUSI") {
         ?>
