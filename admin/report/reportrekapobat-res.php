@@ -87,7 +87,7 @@ $stmt->execute();
       <th>Minimal Stok</th>
       <th>Stok Obat</th>
       <th>Khasiat</th>
-      <th>Keterangan</th>
+      <th>Efek Samping</th>
     </tr>
   </thead>
   <tbody>
@@ -99,12 +99,12 @@ $stmt->execute();
       <tr>
         <td><?= $no++ ?></td>
         <td style="text-transform: uppercase;" ><?= $row['nama_obat'] ?></td>
-        <td><?= $row['jenis_obat'] ?></td>
+        <td style="text-transform: uppercase;" ><?= $row['jenis_obat'] ?></td>
         <td><?= $row['harga_jual'] ?></td>
         <td><?= $row['minimal_stok'] ?></td>
         <td><?= $row['stok_obat'] ?></td>
-        <td><?= $row['khasiat'] ?></td>
-        <td><?= $row['ket'] ?></td>
+        <td style="text-transform: uppercase;" ><?= $row['khasiat'] ?></td>
+        <td style="text-transform: uppercase;" ><?= $row['efek_samping'] ?></td>
       </tr>
     <?php } ?>
   </tbody>
