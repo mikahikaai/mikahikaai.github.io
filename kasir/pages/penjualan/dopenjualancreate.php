@@ -46,5 +46,15 @@ for ($i = 0; $i < $jumlah_data; $i++) {
 
 updateStok();
 
+
+?>
+<script type="text/javascript">
+
+window.open( "./report/reportrekappenjualandetail.php?no_penjualan=<?= $format_no_penjualan_baru; ?>" )
+</script> 
+
+<?php
+
 echo '<meta http-equiv="refresh" content="0;url=?page=penjualanread"/>';
-exit;
+
+?>
