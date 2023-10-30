@@ -46,7 +46,7 @@ $stmt_obat->execute();
       <h3 class="card-title">Data Tambah Penjualan</h3>
     </div>
     <div class="card-body">
-      <form action="?page=dopenjualancreate" method="post">
+      <form action="?page=dopenjualancreate" method="post" class="needs-validation" novalidate>
         <div class="row">
           <div class="col-md-9">
             <div class="form-group">
@@ -92,7 +92,10 @@ $stmt_obat->execute();
                 <div class="col-md">
                   <div class="form-group">
                     <label for="jumlah_obat[]">Jumlah</label>
-                    <input type="number" name="jumlah_obat[]" class="form-control" min="1" value="<?= isset($_POST['button_create']) ? $_POST['jumlah_obat'] : '' ?>" style="text-transform: uppercase;" required>
+                    <input type="number" name="jumlah_obat[]" class="form-control" min="1"  value="<?= isset($_POST['button_create']) ? $_POST['jumlah_obat'] : '' ?>" style="text-transform: uppercase;" required>
+                    <div class="invalid-feedback">
+                      Jumlah pembelian obat melebihi stok!
+                    </div>
                   </div>
                 </div>
                 <div class="col-md">
@@ -144,6 +147,38 @@ include_once "../partials/scriptdatatables.php";
 
 <!-- /.content -->
 <script>
+  (function() {
+    var regExp = /[a-z]/i;
+
+    $(document).on('keypress', 'input[name="jumlah_obat[]"]', function(e) {
+      // return false;
+      var value = String.fromCharCode(e.which) || e.key;
+
+      // No letters
+      if (regExp.test(value)) {
+        e.preventDefault();
+        return false;
+      }
+    })
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function(form) {
+        form.addEventListener('submit', function(event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+
   $(document).on('click', 'button[name="tambah_penjualan"]', function(e) {
     var html = '';
     html += '<div class="row">';
@@ -151,37 +186,41 @@ include_once "../partials/scriptdatatables.php";
     html += '<div class="form-group">';
     html += '<label for="id_obat[]">Nama Obat</label>'
     html += '<select name="id_obat[]" class="form-control" required>'
-    html +='<option value=""></option>'
-    html +='<?php $stmt_obat->execute(); while ($rowobat = $stmt_obat->fetch(PDO::FETCH_ASSOC)) { ?>';
-    html +='<option value=<?= $rowobat['id_obat'] ?>><?= strtoupper($rowobat['nama_obat']) ?></option>';
-    html +='<?php };?>';
-    html +='</select>';
-    html +='</div>';
-    html +='</div>';
-    html +='<div class="col-md">';
-    html +='<div class="form-group">';
-    html +='<label for="jumlah_obat[]">Jumlah</label>';
-    html +='<input type="number" name="jumlah_obat[]" class="form-control" min="1" value="<?= isset($_POST['button_create']) ? $_POST['jumlah_obat'] : '' ?>" style="text-transform: uppercase;" required>';
-    html +='</div>';
-    html +='</div>';
-    html +='<div class="col-md">';
-    html +='<div class="form-group">';
-    html +='<label for="harga[]">Harga</label>';
-    html +='<input type="number" name="harga[]" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah'] : '' ?>" style="text-transform: uppercase;" required readonly>';
-    html +='</div>';
-    html +='</div>';
-    html +='<div class="col-md">';
-    html +='<div class="form-group">';
-    html +='<label for="subtotal">Total</label>';
-    html +='<div class="input-group">';
-    html +='<input type="number" name="subtotal" class="form-control" value="0" style="text-transform: uppercase;" readonly>';
-    html +='<div class="input-group-append ml-3">';
-    html +='<button type="button" class="btn btn-sm btn-danger form-control" name="hapus_penjualan"><i class="fa fa-times"></i></button>';
-    html +='</div>';
-    html +='</div>';
-    html +='</div>';
-    html +='</div>';
-    html +='</div>';
+    html += '<option value=""></option>'
+    html += '<?php $stmt_obat->execute();
+              while ($rowobat = $stmt_obat->fetch(PDO::FETCH_ASSOC)) { ?>';
+    html += '<option value=<?= $rowobat['id_obat'] ?>><?= strtoupper($rowobat['nama_obat']) ?></option>';
+    html += '<?php }; ?>';
+    html += '</select>';
+    html += '</div>';
+    html += '</div>';
+    html += '<div class="col-md">';
+    html += '<div class="form-group">';
+    html += '<label for="jumlah_obat[]">Jumlah</label>';
+    html += '<input type="number" name="jumlah_obat[]" class="form-control" min="1" value="<?= isset($_POST['button_create']) ? $_POST['jumlah_obat'] : '' ?>" style="text-transform: uppercase;" required>';
+    html += '<div class="invalid-feedback">';
+    html += 'Jumlah pembelian obat melebihi stok!';
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
+    html += '<div class="col-md">';
+    html += '<div class="form-group">';
+    html += '<label for="harga[]">Harga</label>';
+    html += '<input type="number" name="harga[]" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah'] : '' ?>" style="text-transform: uppercase;" required readonly>';
+    html += '</div>';
+    html += '</div>';
+    html += '<div class="col-md">';
+    html += '<div class="form-group">';
+    html += '<label for="subtotal">Total</label>';
+    html += '<div class="input-group">';
+    html += '<input type="number" name="subtotal" class="form-control" value="0" style="text-transform: uppercase;" readonly>';
+    html += '<div class="input-group-append ml-3">';
+    html += '<button type="button" class="btn btn-sm btn-danger form-control" name="hapus_penjualan"><i class="fa fa-times"></i></button>';
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
     $('#dinamis').append(html);
   });
 
@@ -232,12 +271,17 @@ include_once "../partials/scriptdatatables.php";
       success: function(data) {
         // console.log(data);
         $(e.target).parents('.row:first').find("input[name='harga[]']").val(data[0]);
+        $(e.target).parents('.row:first').find("input[name='jumlah_obat[]']").val(1);
         $(e.target).parents('.row:first').find("input[name='jumlah_obat[]']").attr('max', data[1]);
+        // if ($(e.target).parents('.row:first').find("input[name='jumlah_obat[]']")>data[1]) {
+
+        // }
+        var currentJumlah = $(e.target).parents('.row').find('input[name="jumlah_obat[]"]').val();
+        var currentHarga = $(e.target).parents('.row').find('input[name="harga[]"]').val();
+        $(e.target).parents('.row').find("input[name='subtotal']").val(currentHarga * currentJumlah);
+
+
       }
     });
   });
-
-  $(document).on('keypress', 'input[name="jumlah_obat[]"]', function(e){
-    return false;
-  })
 </script>

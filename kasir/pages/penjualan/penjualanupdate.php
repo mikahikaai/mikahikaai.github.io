@@ -50,12 +50,12 @@ $rowpenjualan = $stmt_penjualan->fetch(PDO::FETCH_ASSOC);
       <h3 class="card-title">Ubah Data Penjualan</h3>
     </div>
     <div class="card-body">
-      <form action="?page=dopenjualanupdate&id=<?= $_GET['id'] ?>" method="post">
+      <form action="?page=dopenjualanupdate&id=<?= $_GET['id'] ?>" method="post" class="needs-validation" novalidate>
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
               <label for="no_penjualan">Nomor Penjualan</label>
-              <input name="no_penjualan" placeholder="Masukkan No. Penjualan" class="form-control" style="text-transform: uppercase;" value="<?= $_GET['id'] ?>"readonly>
+              <input name="no_penjualan" placeholder="Masukkan No. Penjualan" class="form-control" style="text-transform: uppercase;" value="<?= $_GET['id'] ?>" readonly>
             </div>
           </div>
           <div class="col-md-6">
@@ -109,7 +109,10 @@ $rowpenjualan = $stmt_penjualan->fetch(PDO::FETCH_ASSOC);
                   <div class="col-md">
                     <div class="form-group">
                       <label for="jumlah_obat[]">Jumlah</label>
-                      <input type="number" name="jumlah_obat[]" class="form-control" value="<?= $rowpenjualan['jumlah_obat'] ?>" required>
+                      <input type="number" name="jumlah_obat[]" class="form-control" min="1" max="<?= $rowpenjualan['stok_obat']+$rowpenjualan['jumlah_obat']?>" value="<?= $rowpenjualan['jumlah_obat'] ?>" required>
+                      <div class="invalid-feedback">
+                        Jumlah pembelian obat melebihi stok!
+                      </div>
                     </div>
                   </div>
                   <div class="col-md">
@@ -162,6 +165,38 @@ include_once "../partials/scriptdatatables.php";
 
 <!-- /.content -->
 <script>
+  (function() {
+    var regExp = /[a-z]/i;
+
+    $(document).on('keypress', 'input[name="jumlah_obat[]"]', function(e) {
+      // return false;
+      var value = String.fromCharCode(e.which) || e.key;
+
+      // No letters
+      if (regExp.test(value)) {
+        e.preventDefault();
+        return false;
+      }
+    })
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function(form) {
+        form.addEventListener('submit', function(event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+
   $(document).on('click', 'button[name="tambah_penjualan"]', function(e) {
     var html = '';
     html += '<div class="row">';
@@ -180,7 +215,10 @@ include_once "../partials/scriptdatatables.php";
     html += '<div class="col-md">';
     html += '<div class="form-group">';
     html += '<label for="jumlah_obat[]">Jumlah</label>';
-    html += '<input type="number" name="jumlah_obat[]" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah_obat'] : '' ?>" style="text-transform: uppercase;" required>';
+    html += '<input type="number" name="jumlah_obat[]" class="form-control" value="<?= isset($_POST['button_create']) ? $_POST['jumlah_obat'] : 1 ?>" style="text-transform: uppercase;" required>';
+    html += '<div class="invalid-feedback">';
+    html += 'Jumlah pembelian obat melebihi stok!';
+    html += '</div>';
     html += '</div>';
     html += '</div>';
     html += '<div class="col-md">';
@@ -251,6 +289,11 @@ include_once "../partials/scriptdatatables.php";
       success: function(data) {
         // console.log(data);
         $(e.target).parents('.row:first').find("input[name='harga[]']").val(data[0]);
+        $(e.target).parents('.row:first').find("input[name='jumlah_obat[]']").attr('max', data[1]);
+        var currentJumlah = $(e.target).parents('.row').find('input[name="jumlah_obat[]"]').val();
+        var currentHarga = $(e.target).parents('.row').find('input[name="harga[]"]').val();
+        $(e.target).parents('.row').find("input[name='subtotal']").val(currentHarga * currentJumlah);
+
       }
     });
   });
