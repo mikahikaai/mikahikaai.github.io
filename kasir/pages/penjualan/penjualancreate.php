@@ -64,7 +64,7 @@ $stmt_obat->execute();
           <div class="col-md-3">
             <div class="form-group">
               <label for="tgl_penjualan">Tanggal Penjualan</label>
-              <input type="date" name="tgl_penjualan" class="form-control">
+              <input type="date" name="tgl_penjualan" class="form-control" required>
             </div>
           </div>
         </div>

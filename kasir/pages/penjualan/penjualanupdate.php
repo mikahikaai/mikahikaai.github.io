@@ -74,7 +74,7 @@ $rowpenjualan = $stmt_penjualan->fetch(PDO::FETCH_ASSOC);
           <div class="col-md-2">
             <div class="form-group">
               <label for="tgl_penjualan">Tanggal Penjualan</label>
-              <input type="date" name="tgl_penjualan" class="form-control" value="<?= $rowpenjualan['tgl_penjualan'] ?>">
+              <input type="date" name="tgl_penjualan" class="form-control" value="<?= $rowpenjualan['tgl_penjualan'] ?>" required>
             </div>
           </div>
         </div>
